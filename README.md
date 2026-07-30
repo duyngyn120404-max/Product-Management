@@ -28,6 +28,40 @@ hoặc triển khai production, image sẽ được khóa thêm bằng digest.
 
 Không cần cài trực tiếp Odoo, Python hoặc PostgreSQL trên máy phát triển.
 
+Các phiên bản đã kiểm tra trong SET-02:
+
+```text
+Docker Engine:  29.1.3
+Docker Compose: 2.40.3
+Odoo:           19.0-20260723
+```
+
+Image development hiện tại:
+
+```text
+Tag:    odoo:19.0
+Digest: sha256:e415f9924395e7521245813135112f264b9222bcde3b1d3c2ee9ff073081540a
+```
+
+## Odoo development
+
+Tải image chính thức và xác nhận phiên bản:
+
+```bash
+docker pull odoo:19.0
+docker run --rm odoo:19.0 odoo --version
+```
+
+Cấu hình development nằm tại `config/odoo.conf`. Khi container được tích hợp
+ở SET-04:
+
+- `config/` được mount vào `/etc/odoo`.
+- `addons/` được mount vào `/mnt/extra-addons`.
+- Dữ liệu Odoo nằm tại `/var/lib/odoo` và được giữ bằng named volume.
+
+`odoo.conf` không chứa database password hoặc master password. Các giá trị bí
+mật được cung cấp từ `.env` khi Docker Compose được tạo ở SET-04.
+
 ## Bắt đầu
 
 ```bash

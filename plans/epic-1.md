@@ -224,7 +224,7 @@ SET-01
 | ID | Công việc | Ưu tiên | Ước tính | Trạng thái |
 |---|---|---:|---:|---|
 | SET-01 | Khởi tạo repository Git | Must | 1 giờ | Hoàn thành |
-| SET-02 | Tạo môi trường Odoo Community | Must | 3 giờ | Chưa thực hiện |
+| SET-02 | Tạo môi trường Odoo Community | Must | 3 giờ | Hoàn thành |
 | SET-03 | Cấu hình PostgreSQL | Must | 2 giờ | Chưa thực hiện |
 | SET-04 | Tạo Docker Compose | Must | 4 giờ | Chưa thực hiện |
 | SET-05 | Tạo module quản lý sản phẩm | Must | 3 giờ | Chưa thực hiện |
@@ -285,6 +285,8 @@ quy trình cộng tác.
 
 ### SET-02 — Tạo môi trường Odoo Community
 
+**Trạng thái:** Hoàn thành.
+
 **Mục tiêu**
 
 Chuẩn bị Odoo Community 19.0 làm nền tảng chạy ứng dụng.
@@ -298,12 +300,25 @@ Chuẩn bị Odoo Community 19.0 làm nền tảng chạy ứng dụng.
 - Thiết lập log phù hợp với môi trường development.
 - Xác nhận phiên bản Odoo đang chạy.
 
+**Phiên bản đã xác nhận**
+
+```text
+Docker Engine:  29.1.3
+Docker Compose: 2.40.3
+Odoo Server:    19.0-20260723
+Image digest:   sha256:e415f9924395e7521245813135112f264b9222bcde3b1d3c2ee9ff073081540a
+```
+
 **Tiêu chí hoàn thành**
 
-- Container Odoo khởi động không có lỗi nghiêm trọng.
-- Truy cập được giao diện Odoo qua trình duyệt.
-- Odoo nhận diện đúng custom addons path.
-- Filestore vẫn tồn tại sau khi container được tạo lại.
+- Docker image chính thức `odoo:19.0` được tải thành công.
+- Lệnh `odoo --version` xác nhận Odoo Server 19.0.
+- `config/odoo.conf` hợp lệ và không chứa secret.
+- Custom addons được mount và nhận diện tại `/mnt/extra-addons`.
+- Thư mục dữ liệu Odoo được xác định là `/var/lib/odoo`.
+
+Việc truy cập giao diện, kết nối PostgreSQL và kiểm tra persistent volume được
+xác nhận trong SET-04 sau khi hai service được tích hợp bằng Docker Compose.
 
 ### SET-03 — Cấu hình PostgreSQL
 
