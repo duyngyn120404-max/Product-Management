@@ -226,7 +226,7 @@ SET-01
 | SET-01 | Khởi tạo repository Git | Must | 1 giờ | Hoàn thành |
 | SET-02 | Tạo môi trường Odoo Community | Must | 3 giờ | Hoàn thành |
 | SET-03 | Cấu hình PostgreSQL | Must | 2 giờ | Hoàn thành |
-| SET-04 | Tạo Docker Compose | Must | 4 giờ | Chưa thực hiện |
+| SET-04 | Tạo Docker Compose | Must | 4 giờ | Hoàn thành |
 | SET-05 | Tạo module quản lý sản phẩm | Must | 3 giờ | Chưa thực hiện |
 | SET-06 | Tạo dữ liệu mẫu ban đầu | Should | 2 giờ | Chưa thực hiện |
 | SET-07 | Thiết lập CI cơ bản | Should | 3 giờ | Chưa thực hiện |
@@ -368,6 +368,8 @@ Role kết nối:      odoo
 
 ### SET-04 — Tạo Docker Compose
 
+**Trạng thái:** Hoàn thành.
+
 **Mục tiêu**
 
 Chuẩn hóa cách khởi động Odoo và PostgreSQL bằng một lệnh.
@@ -381,6 +383,30 @@ Chuẩn hóa cách khởi động Odoo và PostgreSQL bằng một lệnh.
 - Tạo cấu hình chung, development và production.
 - Bổ sung health check hoặc cơ chế chờ PostgreSQL sẵn sàng nếu cần.
 - Ghi lệnh vận hành trong README.
+
+**Kết quả triển khai**
+
+- `compose.yaml` định nghĩa service `odoo`, service `db`, network và hai named
+  volumes.
+- `compose.dev.yaml` publish port Odoo và mount source addon cho development.
+- `compose.prod.yaml` thiết lập restart policy, loopback port và cấu hình Odoo
+  production làm nền cho Epic 9.
+- PostgreSQL healthcheck chặn Odoo khởi động trước khi database sẵn sàng.
+- PostgreSQL không publish port `5432` ra host.
+- `scripts/odoo-entrypoint.sh` tạo cấu hình runtime chứa master password từ
+  biến môi trường; secret không được ghi vào Git.
+
+**Kết quả kiểm tra**
+
+- `docker compose config` hợp lệ cho development và production.
+- PostgreSQL đạt trạng thái healthy.
+- Odoo 19 kết nối PostgreSQL 15 thành công.
+- Giao diện Odoo trả HTTP 200 tại port `8069`.
+- Odoo tạo thành công database `product_management_dev`.
+- Database marker và Odoo data marker vẫn tồn tại sau khi `docker compose
+  down` và `docker compose up -d` tạo lại container.
+- Stack và volume chứa mật khẩu kiểm thử đã được xóa sau nghiệm thu.
+- Hai container HCDC vẫn dừng và hai volume HCDC không bị thay đổi.
 
 **Các lệnh chuẩn**
 

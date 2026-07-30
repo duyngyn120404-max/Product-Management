@@ -1,0 +1,10 @@
+services:
+  db:
+    restart: unless-stopped
+
+  odoo:
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${ODOO_PORT:-8069}:8069"
+    volumes:
+      - ./config/odoo.prod.conf:/etc/odoo/odoo.conf:ro

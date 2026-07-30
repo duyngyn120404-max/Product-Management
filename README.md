@@ -6,8 +6,8 @@ hỗ trợ tư vấn khách hàng và theo dõi cơ bản giá bán, số lượ
 
 ## Trạng thái
 
-Dự án đang ở giai đoạn khởi tạo. SET-01 thiết lập repository và quy ước làm
-việc; môi trường Odoo/PostgreSQL sẽ được bổ sung trong SET-02 đến SET-04.
+Dự án đang ở giai đoạn khởi tạo. SET-01 đến SET-04 đã hoàn thành repository,
+Odoo, PostgreSQL và môi trường Docker Compose.
 
 ## Công nghệ
 
@@ -73,12 +73,20 @@ cp .env.example .env
 
 Mở `.env` và thay các giá trị có tiền tố `replace_with_`. Không commit `.env`.
 
-Các file Compose được tạo trong SET-04. Sau khi SET-04 hoàn thành, chạy
-development bằng:
+Khởi động development bằng:
 
 ```bash
 docker compose -f compose.yaml -f compose.dev.yaml up -d
 ```
+
+Trong lần chạy đầu tiên, mở:
+
+```text
+http://localhost:8069/web/database/manager
+```
+
+Dùng giá trị `ODOO_ADMIN_PASSWORD` làm master password và tạo database
+`product_management_dev`.
 
 Các lệnh vận hành:
 
@@ -91,6 +99,30 @@ docker compose down
 
 Không dùng `docker compose down -v` cho development hoặc production vì tùy
 chọn `-v` xóa volume dữ liệu.
+
+## Docker Compose
+
+- `compose.yaml`: hai service `odoo` và `db`, network, healthcheck và named
+  volumes dùng chung.
+- `compose.dev.yaml`: publish port ra máy phát triển và mount addon ở chế độ
+  ghi để phát triển.
+- `compose.prod.yaml`: restart tự động, chỉ bind Odoo vào loopback để đặt sau
+  Nginx và dùng cấu hình production.
+
+PostgreSQL phải healthy trước khi Odoo khởi động. Port PostgreSQL `5432` chỉ
+hoạt động trong Docker network và không được publish ra host.
+
+Named volumes:
+
+```text
+product-management-pv_db-data
+product-management-pv_odoo-data
+```
+
+Master password được đọc từ `.env`, ghi vào file cấu hình tạm bên trong
+container bởi `scripts/odoo-entrypoint.sh` và không được lưu trong repository.
+`compose.prod.yaml` mới là cấu hình nền; việc đóng gói addon vào image, khóa
+digest, Nginx và HTTPS thuộc Epic 9.
 
 ## URL truy cập
 
@@ -114,10 +146,10 @@ product-management-pv/
 ├── scripts/                 Quy trình kỹ thuật chạy lặp lại
 ├── .env.example             Mẫu biến môi trường
 ├── .gitignore
-├── compose.yaml             Cấu hình chung, tạo ở SET-04
+├── compose.yaml             Cấu hình container dùng chung
 ├── compose.ci.yaml          Cấu hình CI, tạo ở SET-07
-├── compose.dev.yaml         Cấu hình development, tạo ở SET-04
-└── compose.prod.yaml        Cấu hình production, tạo ở SET-04
+├── compose.dev.yaml         Cấu hình development
+└── compose.prod.yaml        Nền cấu hình production
 ```
 
 `scripts/` chỉ chứa thao tác có nhiều bước hoặc cần thực hiện nhất quán, ví dụ

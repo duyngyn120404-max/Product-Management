@@ -1,0 +1,6 @@
+services:
+  odoo:
+    ports:
+      - "${ODOO_PORT:-8069}:8069"
+    volumes:
+      - ./addons:/mnt/extra-addons
