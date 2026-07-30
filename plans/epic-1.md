@@ -225,7 +225,7 @@ SET-01
 |---|---|---:|---:|---|
 | SET-01 | Khởi tạo repository Git | Must | 1 giờ | Hoàn thành |
 | SET-02 | Tạo môi trường Odoo Community | Must | 3 giờ | Hoàn thành |
-| SET-03 | Cấu hình PostgreSQL | Must | 2 giờ | Chưa thực hiện |
+| SET-03 | Cấu hình PostgreSQL | Must | 2 giờ | Hoàn thành |
 | SET-04 | Tạo Docker Compose | Must | 4 giờ | Chưa thực hiện |
 | SET-05 | Tạo module quản lý sản phẩm | Must | 3 giờ | Chưa thực hiện |
 | SET-06 | Tạo dữ liệu mẫu ban đầu | Should | 2 giờ | Chưa thực hiện |
@@ -314,13 +314,16 @@ Image digest:   sha256:e415f9924395e7521245813135112f264b9222bcde3b1d3c2ee9ff073
 - Docker image chính thức `odoo:19.0` được tải thành công.
 - Lệnh `odoo --version` xác nhận Odoo Server 19.0.
 - `config/odoo.conf` hợp lệ và không chứa secret.
-- Custom addons được mount và nhận diện tại `/mnt/extra-addons`.
+- Custom addons được mount tại `/mnt/extra-addons`; việc Odoo nhận diện module
+  trong đường dẫn này được xác nhận ở SET-05 sau khi module được tạo.
 - Thư mục dữ liệu Odoo được xác định là `/var/lib/odoo`.
 
 Việc truy cập giao diện, kết nối PostgreSQL và kiểm tra persistent volume được
 xác nhận trong SET-04 sau khi hai service được tích hợp bằng Docker Compose.
 
 ### SET-03 — Cấu hình PostgreSQL
+
+**Trạng thái:** Hoàn thành.
 
 **Mục tiêu**
 
@@ -335,6 +338,26 @@ Cung cấp cơ sở dữ liệu ổn định và lưu bền cho Odoo.
 - Cấu hình persistent volume cho PostgreSQL.
 - Kiểm tra kết nối từ Odoo đến service database.
 - Không công khai port PostgreSQL ra máy host nếu chưa có nhu cầu.
+
+**Phiên bản đã xác nhận**
+
+```text
+PostgreSQL Server: 15.18 (Debian 15.18-1.pgdg13+1)
+Image tag:         postgres:15
+Image digest:      sha256:74e110c41804365e3915fcc09d5e7a1eff50161aaa94d5da0e58e0cd75ae509c
+Role kết nối:      odoo
+```
+
+**Kết quả kiểm tra**
+
+- PostgreSQL khởi động và `pg_isready` xác nhận sẵn sàng.
+- Service không publish port `5432` ra host.
+- Odoo 19 kết nối qua Docker network và tạo
+  `product_management_test` thành công.
+- Một marker được ghi vào database, container PostgreSQL được xóa và tạo lại
+  với cùng named volume; marker vẫn đọc lại được.
+- Container, network và volume kiểm thử tạm đã được xóa sau khi kiểm tra.
+- Hai volume HCDC không bị thay đổi.
 
 **Tiêu chí hoàn thành**
 

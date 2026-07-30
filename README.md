@@ -34,6 +34,7 @@ Các phiên bản đã kiểm tra trong SET-02:
 Docker Engine:  29.1.3
 Docker Compose: 2.40.3
 Odoo:           19.0-20260723
+PostgreSQL:     15.18
 ```
 
 Image development hiện tại:
@@ -131,6 +132,24 @@ lệnh Compose đơn giản.
 | Automated test | `product_management_test` |
 | Demo/UAT | `product_management_uat` |
 | Production | `product_management_prod` |
+
+Image development:
+
+```text
+Tag:    postgres:15
+Digest: sha256:74e110c41804365e3915fcc09d5e7a1eff50161aaa94d5da0e58e0cd75ae509c
+```
+
+PostgreSQL sử dụng role `odoo`, không sử dụng role `postgres` làm tài khoản
+kết nối của Odoo. Trong cấu hình Compose ở SET-04:
+
+- Host database là tên service `db`.
+- Port `5432` chỉ mở trong Docker network, không publish ra host.
+- Database và password khởi tạo lấy từ `.env`.
+- Dữ liệu PostgreSQL được giữ trong named volume.
+
+SET-03 đã kiểm tra Odoo 19 tạo database qua Docker network và xác nhận dữ liệu
+vẫn tồn tại sau khi container PostgreSQL được tạo lại với cùng volume.
 
 ## Module Odoo
 
