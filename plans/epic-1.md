@@ -227,7 +227,7 @@ SET-01
 | SET-02 | Tạo môi trường Odoo Community | Must | 3 giờ | Hoàn thành |
 | SET-03 | Cấu hình PostgreSQL | Must | 2 giờ | Hoàn thành |
 | SET-04 | Tạo Docker Compose | Must | 4 giờ | Hoàn thành |
-| SET-05 | Tạo module quản lý sản phẩm | Must | 3 giờ | Chưa thực hiện |
+| SET-05 | Tạo module quản lý sản phẩm | Must | 3 giờ | Hoàn thành |
 | SET-06 | Tạo dữ liệu mẫu ban đầu | Should | 2 giờ | Chưa thực hiện |
 | SET-07 | Thiết lập CI cơ bản | Should | 3 giờ | Chưa thực hiện |
 
@@ -461,6 +461,8 @@ Port mặc định đề xuất là `8069`.
 
 ### SET-05 — Tạo module quản lý sản phẩm
 
+**Trạng thái:** Hoàn thành.
+
 **Mục tiêu**
 
 Tạo bộ khung module nghiệp vụ để các Epic tiếp theo triển khai chức năng.
@@ -496,14 +498,39 @@ addons/product_management/
 **Cập nhật module**
 
 ```bash
-docker compose exec odoo odoo \
+docker compose -f compose.yaml -f compose.dev.yaml run --rm odoo \
   -d <database_name> \
   -u product_management \
-  --stop-after-init
+  --stop-after-init \
+  --no-http
 ```
 
-Lệnh phải được điều chỉnh nếu cách chạy service Odoo thực tế yêu cầu tham số
-khác. Sau khi cập nhật, khởi động lại service Odoo nếu cần.
+**Kết quả triển khai**
+
+- Tên kỹ thuật: `product_management`.
+- Version: `19.0.1.0.0`.
+- License: `LGPL-3`.
+- Dependency: `base`, `web`.
+- Module được đánh dấu là application và installable.
+- Có root menu và client action thông báo tối thiểu để xác nhận XML được nạp.
+- Các thư mục `models`, `views`, `security`, `data` và `demo` đã sẵn sàng cho
+  các Epic nghiệp vụ.
+- Chưa tạo model danh mục hoặc sản phẩm, tránh vượt phạm vi SET-05.
+
+**Kết quả kiểm tra**
+
+- Odoo nhận diện `/mnt/extra-addons` sau khi module được tạo.
+- Cài module thành công trên database sạch `product_management_test`.
+- Trạng thái trong `ir_module_module` là `installed`.
+- Version trong database là `19.0.1.0.0`.
+- XML ID của root menu và client action được tạo thành công.
+- Nâng cấp module bằng `-u product_management` thành công.
+- Stack và volume kiểm thử đã được xóa sau nghiệm thu.
+
+Khi chạy `--test-enable` không giới hạn, Odoo kích hoạt cả test lõi. Một số
+core CLI test của image chính thức yêu cầu đường dẫn source `odoo-bin` không
+có trong image đóng gói. Vì vậy CI ở SET-07 phải giới hạn test bằng
+`--test-tags=/product_management` thay vì chạy toàn bộ core test.
 
 **Tiêu chí hoàn thành**
 
@@ -578,7 +605,7 @@ Sử dụng GitHub Actions. Workflow được đặt tại:
 - Kiểm tra cấu trúc các file XML.
 - Khởi động PostgreSQL với database tạm `product_management_test`.
 - Cài module `product_management` trên Odoo.
-- Chạy các Odoo test hiện có với `--test-enable`.
+- Chạy các Odoo test của module với `--test-tags=/product_management`.
 - Dừng và xóa container, network và volume tạm sau khi kiểm tra.
 - Hiển thị kết quả thành công hoặc thất bại trên pull request.
 
@@ -605,10 +632,9 @@ docker compose \
   -f compose.yaml \
   -f compose.ci.yaml \
   run --rm odoo \
-  odoo \
   -d product_management_test \
   -i product_management \
-  --test-enable \
+  --test-tags=/product_management \
   --stop-after-init
 ```
 

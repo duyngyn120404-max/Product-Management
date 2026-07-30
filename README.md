@@ -185,17 +185,31 @@ vẫn tồn tại sau khi container PostgreSQL được tạo lại với cùng 
 
 ## Module Odoo
 
-Tên kỹ thuật của module là `product_management`. Sau SET-05, có thể cài từ
-giao diện Apps. Lệnh cập nhật dự kiến:
+Tên kỹ thuật của module là `product_management`, version hiện tại
+`19.0.1.0.0`.
+
+Có thể cài module từ giao diện Apps hoặc bằng lệnh:
 
 ```bash
-docker compose exec odoo odoo \
+docker compose -f compose.yaml -f compose.dev.yaml run --rm odoo \
   -d product_management_dev \
-  -u product_management \
-  --stop-after-init
+  -i product_management \
+  --stop-after-init \
+  --no-http
 ```
 
-Lệnh sẽ được xác nhận khi cấu hình Odoo thực tế hoàn thành.
+Cập nhật module:
+
+```bash
+docker compose -f compose.yaml -f compose.dev.yaml run --rm odoo \
+  -d product_management_dev \
+  -u product_management \
+  --stop-after-init \
+  --no-http
+```
+
+Module SET-05 chỉ chứa metadata, root menu và action thông báo tối thiểu. Các
+model nghiệp vụ được bổ sung trong Epic tương ứng.
 
 ## Quy trình Git
 
