@@ -10,6 +10,7 @@
         "web",
     ],
     "data": [
+        "security/product_management_groups.xml",
         "views/product_management_menus.xml",
     ],
     "demo": [],
