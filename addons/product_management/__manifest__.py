@@ -7,10 +7,11 @@
     "license": "LGPL-3",
     "depends": [
         "base",
-        "web",
     ],
     "data": [
         "security/product_management_groups.xml",
+        "security/ir.model.access.csv",
+        "views/category_views.xml",
         "views/product_management_menus.xml",
     ],
     "demo": [],
