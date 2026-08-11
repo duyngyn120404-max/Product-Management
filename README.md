@@ -206,10 +206,11 @@ docker compose -f compose.yaml -f compose.dev.yaml run --rm odoo \
   -u product_management \
   --stop-after-init \
   --no-http
+
+docker compose -f compose.yaml -f compose.dev.yaml restart odoo
 ```
 
-Module SET-05 chỉ chứa metadata, root menu và action thông báo tối thiểu. Các
-model nghiệp vụ được bổ sung trong Epic tương ứng.
+Luôn luôn restart docker sau khi update module.
 
 ## Quy trình Git
 

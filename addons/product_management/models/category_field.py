@@ -10,7 +10,7 @@ class ProductManagementCategoryField(models.Model):
         "product.management.category",
         string="Category",
         required=True,
-        ondelete="cascase"
+        ondelete="cascade"
     )
     field_type = fields.Selection(
         [
@@ -21,6 +21,7 @@ class ProductManagementCategoryField(models.Model):
             ("boolean", "Boolean"),
             ("date", "Date"),
             ("datetime", "Datetime"),
+            ("selection", "Selection"),
         ],
         required = True,
         default="char",
@@ -45,7 +46,7 @@ class ProductManagementCategoryFieldOption(models.Model):
         "product.management.category.field",
         string="Field",
         required=True,
-        ondelete="cascase"
+        ondelete="cascade"
     )
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)

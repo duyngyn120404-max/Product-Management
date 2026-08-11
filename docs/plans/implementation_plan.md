@@ -29,7 +29,7 @@ To end:
 | Done | CAT-01 | Tạo model category. |
 | Done | CAT-02 | Cho phép Admin tạo, cập nhật, ngừng sử dụng và xóa danh mục. |
 | Done | CAT-03 | Tạo model định nghĩa field theo danh mục và model cho field options. |
-| In Progress | CAT-04 | Cho phép Admin cấu hình field, kiểu dữ liệu, trạng thái bắt buộc và thứ tự hiển thị. |
+| Done | CAT-04 | Cho phép Admin cấu hình field, kiểu dữ liệu, trạng thái bắt buộc và thứ tự hiển thị. |
 | Not Started | CAT-05 | Đảm bảo danh mục quyết định bộ field của sản phẩm. |
 
 ## Epic 4. Product Management 

@@ -14,3 +14,9 @@ class ProductManagementCategory(models.Model):
         string="Parent Category",
         ondelete="restrict"
     )
+
+    field_ids = fields.One2many(
+        "product.management.category.field",
+        "category_id",
+        string="Fields",
+    )

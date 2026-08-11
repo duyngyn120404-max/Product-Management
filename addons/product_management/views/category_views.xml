@@ -23,6 +23,8 @@
                         <group>
                             <field name="name"/>
                             <field name="parent_id"/>
+                        </group>
+                        <group>
                             <field name="sequence"/>
                             <field name="active"/>
                         </group>
@@ -32,17 +34,65 @@
                         <field name="description"/>
                     </group>
 
-                    <group string="Audit Information">
-                        <group>
-                            <field name="create_uid" readonly="1"/>
-                            <field name="create_date" readonly="1"/>
-                        </group>
+                    <notebook>
+                        <page string="Field">
+                            <field name="field_ids">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="field_type"/>
+                                    <field name="required"/>
+                                    <field name="help"/>
+                                    <field name="active"/>
+                                </list>
 
-                        <group>
-                            <field name="write_uid" readonly="1"/>
-                            <field name="write_date" readonly="1"/>
-                        </group>
-                    </group>
+                                <form string="Category Field">
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="field_type"/>
+                                                <field name="required"/>
+                                            </group>
+
+                                            <group>
+                                                <field name="sequence"/>
+                                                <field name="active"/>
+                                                <field name="help"/>
+                                            </group>
+                                        </group>
+
+                                        <notebook>
+                                            <page string="Options" invisible="field_type != 'selection'">
+                                                <field name="option_ids">
+                                                    <list editable="bottom">
+                                                        <field name="sequence" widget="handle"/>
+                                                        <field name="name"/>
+                                                        <field name="active"/>
+                                                    </list>
+                                                </field>
+                                            </page>
+                                        </notebook>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+
+                        <page string="Audit Information">
+                            <group>
+                                <group>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+
+                                <group>
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+
                 </sheet>
             </form>
         </field>
