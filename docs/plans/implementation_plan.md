@@ -9,8 +9,6 @@
 | Ngày lập | 2026-08-07 |
 
 ## Epic 1. Project Setup
-Start from: 
-To end: 
 | Status | ID | Task |
 |---|---|---|
 | Done | SET-01 | Thiết lập cấu trúc repository. |
@@ -22,7 +20,7 @@ To end:
 
 ## Epic 2. Category Management
 Start from: 10/08/2026
-To end:
+To end:: 11/08/2026
 
 | Done | ID | Task |
 |---|---|---|
@@ -30,18 +28,20 @@ To end:
 | Done | CAT-02 | Cho phép Admin tạo, cập nhật, ngừng sử dụng và xóa danh mục. |
 | Done | CAT-03 | Tạo model định nghĩa field theo danh mục và model cho field options. |
 | Done | CAT-04 | Cho phép Admin cấu hình field, kiểu dữ liệu, trạng thái bắt buộc và thứ tự hiển thị. |
-| Not Started | CAT-05 | Đảm bảo danh mục quyết định bộ field của sản phẩm. |
 
 ## Epic 4. Product Management 
 | Done | ID | Task |
 |---|---|---|
-| [ ] | PRO-01 | Tạo model sản phẩm. |
-| [ ] | PRO-02 | Cho phép Admin tạo, cập nhật và ngừng sử dụng sản phẩm. |
-| [ ] | PRO-03 | Gắn sản phẩm với danh mục. |
-| [ ] | PRO-04 | Lưu thông tin chung của sản phẩm. |
-| [ ] | PRO-05 | Lưu giá trị field động theo danh mục bằng mô hình EAV. |
-| [ ] | PRO-06 | Hiển thị trạng thái sản phẩm và tồn kho cơ bản. |
+| Done | PRO-01 | Tạo model sản phẩm. |
+| Done | PRO-02 | Cho phép Admin tạo, cập nhật ngừng sử dụng và xóa sản phẩm. |
+| Done | PRO-03 | Gắn sản phẩm với danh mục. |
+| Done | PRO-04 | Đồng bộ khi category field thay đổi. |
 
+Future works:
+- thêm một case thông báo (hoặc raise error/hướng dẫn archieve) cho category field.
+- sync khi option của selector field thay đổi 
+- Ẩn bớt cột kỹ thuật (Text, Decimal,...)
+- Compute stock status
 ## Epic 5. Product Discovery
 
 | Done | ID | Task |

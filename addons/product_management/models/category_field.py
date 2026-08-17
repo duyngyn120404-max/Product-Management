@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 class ProductManagementCategoryField(models.Model):
     _name = "product.management.category.field"
@@ -35,6 +35,47 @@ class ProductManagementCategoryField(models.Model):
         "field_id",
         string="Options",
     )
+
+    def _sync_products_for_categories(self, categories=None):
+        categories = categories or self.mapped("category_id")
+        if not categories:
+            return
+
+        products = self.env["product.management.product"].search([
+            ("category_id", "in", categories.ids)
+        ])
+        products._sync_field_values_with_category()
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        fields = super().create(vals_list)
+        fields._sync_products_for_categories()
+        return fields
+
+
+    def write(self, vals):
+        categories_before = self.mapped("category_id")
+
+        result = super().write(vals)
+
+        sync_fields = {"category_id", "active", "sequence", "name", "field_type", "required"}
+        if sync_fields & set(vals):
+            categories_after = self.mapped("category_id")
+            self._sync_products_for_categories(categories_before | categories_after)
+
+        return result
+
+    def unlink(self):
+        categories = self.mapped("category_id")
+
+        field_values = self.env["product.management.product.field.value"].search([
+            ("field_id", "in", self.ids)
+        ])
+        field_values.unlink()
+
+        result = super().unlink()
+        self._sync_products_for_categories(categories)
+        return result
 
 class ProductManagementCategoryFieldOption(models.Model):
     _name = "product.management.category.field.option"

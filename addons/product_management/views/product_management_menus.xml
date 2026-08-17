@@ -16,4 +16,13 @@
         sequence="10"
         groups="product_management.group_product_management_viewer"
     />
+
+    <menuitem
+        id="menu_product_management_product"
+        name="Products"
+        parent="menu_product_management_root"
+        action="action_product_management_product"
+        sequence="5"
+        groups="product_management.group_product_management_viewer"
+    />
 </odoo>
