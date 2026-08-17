@@ -1,6 +1,9 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
+LOW_STOCK_THRESHOLD = 5
+
+
 class ProductManagementProduct(models.Model):
     _name = "product.management.product"
     _description = "Product Management Product"
@@ -27,8 +30,9 @@ class ProductManagementProduct(models.Model):
             ("low_stock", "Low Stock"),
             ("out_of_stock", "Out of Stock"),
         ],
-        default="in_stock",
-        required=True,
+        compute="_compute_stock_status",
+        readonly=True,
+        store=True
     )
     product_status = fields.Selection(
         [
@@ -84,32 +88,30 @@ class ProductManagementProduct(models.Model):
             return bool(value.option_id)
         return False         
 
-    @api.constrains("field_value_ids")
+    @api.constrains("product_status", "category_id", "field_value_ids")
     def _check_required_field_values(self):
         for product in self:
-            for value in product.field_value_ids:
-                if not value.required:
-                    continue
+            if product.product_status != "available":
+                continue
 
-                has_value = self._has_required_dynamic_value(value)
+            required_fields = product._get_active_category_fields().filtered("required")
+            values_by_field = {
+                value.field_id.id: value
+                for value in product.field_value_ids
+            }
 
-                '''The following code is commented out because it was replaced by the _has_required_dynamic_value method (a stronger val method).
-                has_value = any([
-                    value.value_char,
-                    value.value_text,
-                    value.value_integer,
-                    value.value_float,
-                    value.value_boolean,
-                    value.value_date,
-                    value.value_datetime,
-                    value.option_id,
-                ])
-                '''
+            missing_field_names = []
 
-                if not has_value:
-                    raise ValidationError(
-                        f"{value.field_id.name} is required for category {product.category_id.name}."
-                    )
+            for field in required_fields:
+                value = values_by_field.get(field.id)
+                if not value or not product._has_required_dynamic_value(value):
+                    missing_field_names.append(field.name)
+
+            if missing_field_names:
+                raise ValidationError(
+                    "Cannot set product to Available because required specifications "
+                    f"are missing: {', '.join(missing_field_names)}."
+                )
                 
 
     def _get_active_category_fields(self):
@@ -147,3 +149,37 @@ class ProductManagementProduct(models.Model):
 
             if commands:
                 product.field_value_ids = commands
+
+    # Business logic constraints
+    @api.constrains("active", "product_status")
+    def _check_active_product_status_consistency(self):
+        for product in self:
+            if not product.active and product.product_status != "discontinued":
+                raise ValidationError(
+                "An available product cannot be archived. "
+                "Set the product status to Draft or Discontinued before archiving."
+                )
+
+    @api.constrains("list_price")
+    def _check_list_price_not_negative(self):
+        for product in self:
+            if product.list_price < 0:
+                raise ValidationError("List price cannot be negative.")
+
+    @api.constrains("qty_available")
+    def _check_qty_available_not_negative(self):
+        for product in self:
+            if product.qty_available < 0:
+                raise ValidationError("The quantity available cannot be negative.")
+
+    @api.depends("qty_available")
+    def _compute_stock_status(self):
+        for product in self:
+            if product.qty_available <= 0:
+                product.stock_status = "out_of_stock"
+            elif product.qty_available <= LOW_STOCK_THRESHOLD:
+                product.stock_status = "low_stock"
+            else:
+                product.stock_status = "in_stock"
+
+    

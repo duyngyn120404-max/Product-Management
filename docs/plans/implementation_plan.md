@@ -42,16 +42,39 @@ Future works:
 - sync khi option của selector field thay đổi 
 - Ẩn bớt cột kỹ thuật (Text, Decimal,...)
 - Compute stock status
+
+## Epic 4. Product Business Rules (Additional for more constraints)
+| Done | ID | Task |
+| --- | --- | --- |
+| Done | BR-01 | Đảm bảo active và product_status không mâu thuẫn nhau.
+| Done | BR-02 | Prevent negative list_price.
+| Done | BR-03 | Prevent negative qty_available.
+| Done | BR-04 | Compute stock_status from qty_available.
+| Done | BR-05 | Validate required dynamic fields when product becomes available.
+| Done | BR-06 | Validate selection option belongs to its category field.
+
+Future works:
+- Ẩn sản phẩm `draft` khỏi màn tra cứu chính của Consultant/Viewer; Discovery mặc định chỉ hiển thị `active=True` và `product_status` thuộc `available` hoặc `discontinued`.
+- Làm rõ rule giá cho sản phẩm `available`: xử lý trường hợp giá chưa chốt hoặc giá liên hệ trước khi enforce `list_price > 0`.
+- Hoàn thiện Product Discovery default domain/filter theo business rules, đặc biệt với `draft`, `discontinued` và archived product.
+- Chốt cách xử lý dữ liệu cũ khi category field bị inactive: giữ lại Product Field Value cũ, ẩn khỏi form chính, và dùng lại nếu field được active lại.
+
 ## Epic 5. Product Discovery
 
+Mục tiêu: cung cấp các công cụ tra cứu để Consultant/Viewer tìm, lọc, sắp xếp
+và mở đúng sản phẩm nhanh hơn dựa trên dữ liệu product đã được kiểm soát bởi
+business rules.
+
 | Done | ID | Task |
-|---|---|---|
-| [ ] | DIS-01 | Xây dựng danh sách sản phẩm. |
-| [ ] | DIS-02 | Xây dựng trang chi tiết sản phẩm. |
-| [ ] | DIS-03 | Tìm kiếm theo tên hoặc mã sản phẩm. |
-| [ ] | DIS-04 | Lọc theo danh mục, trạng thái và thương hiệu. |
-| [ ] | DIS-05 | Sắp xếp danh sách theo giá. |
-| [ ] | DIS-06 | Hiển thị thông tin chi tiết theo field của danh mục. |
+| --- | --- | --- |
+| Not Started | DIS-01 | Đặt Product List làm điểm bắt đầu mặc định cho luồng tra cứu sản phẩm.
+| Not Started | DIS-02 | Thiết lập domain mặc định cho màn tra cứu: active product và trạng thái phù hợp cho Consultant/Viewer.
+| Not Started | DIS-03 | Tối ưu tìm kiếm nhanh theo tên sản phẩm và mã sản phẩm.
+| Not Started | DIS-04 | Bổ sung filter theo danh mục, thương hiệu, product_status và stock_status.
+| Not Started | DIS-05 | Bổ sung filter tư vấn thường dùng: đang bán, ngừng bán, còn hàng, sắp hết hàng, hết hàng.
+| Not Started | DIS-06 | Bổ sung group by theo danh mục, thương hiệu, trạng thái sản phẩm và trạng thái tồn kho.
+| Not Started | DIS-07 | Bổ sung khả năng sắp xếp theo giá, tên và tồn kho nếu Odoo view/action hỗ trợ phù hợp.
+| Not Started | DIS-08 | Kiểm tra bằng user Viewer để đảm bảo luồng tra cứu chỉ đọc nhưng vẫn đủ thông tin tư vấn.
 
 ## Epic 6. Product Comparison
 

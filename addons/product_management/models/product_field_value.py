@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 class ProductManagementProductFieldValue(models.Model):
     _name = "product.management.product.field.value"
@@ -35,3 +36,14 @@ class ProductManagementProductFieldValue(models.Model):
         string="Option",
         ondelete="restrict",
     )
+
+    @api.constrains("field_id", "option_id")
+    def _check_option_belongs_to_field(self):
+        for value in self:
+            if not value.option_id:
+                continue
+
+            if value.option_id.field_id != value.field_id:
+                raise ValidationError(
+                    "The selected option must belong to the selected field."
+                )
