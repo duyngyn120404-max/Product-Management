@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_product_management_category_list" model="ir.ui.view">
+        <field name="name">product.management.category.list</field>
+        <field name="model">product.management.category</field>
+        <field name="arch" type="xml">
+            <list string="Categories">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_product_management_category_form" model="ir.ui.view">
+        <field name="name">product.management.category.form</field>
+        <field name="model">product.management.category</field>
+        <field name="arch" type="xml">
+            <form string="Category">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="parent_id"/>
+                        </group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="description"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Field">
+                            <field name="field_ids">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="field_type"/>
+                                    <field name="required"/>
+                                    <field name="help"/>
+                                    <field name="active"/>
+                                </list>
+
+                                <form string="Category Field">
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="field_type"/>
+                                                <field name="required"/>
+                                            </group>
+
+                                            <group>
+                                                <field name="sequence"/>
+                                                <field name="active"/>
+                                                <field name="help"/>
+                                            </group>
+                                        </group>
+
+                                        <notebook>
+                                            <page string="Options" invisible="field_type != 'selection'">
+                                                <field name="option_ids">
+                                                    <list editable="bottom">
+                                                        <field name="sequence" widget="handle"/>
+                                                        <field name="name"/>
+                                                        <field name="active"/>
+                                                    </list>
+                                                </field>
+                                            </page>
+                                        </notebook>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+
+                        <page string="Audit Information">
+                            <group>
+                                <group>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+
+                                <group>
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_product_management_category_search" model="ir.ui.view">
+        <field name="name">product.management.category.search</field>
+        <field name="model">product.management.category</field>
+        <field name="arch" type="xml">
+            <search string="Categories">
+                <field name="name"/>
+                <field name="parent_id"/>
+                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_product_management_category" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="res_model">product.management.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_product_management_category_search"/>
+        <field name="context">{"search_default_active": 1}</field>
+    </record>
+</odoo>

@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="action_product_management_home" model="ir.actions.client">
-        <field name="name">Product Management</field>
-        <field name="tag">display_notification</field>
-        <field name="params">
-            {
-                "title": "Product Management",
-                "message": "The product management module is ready.",
-                "type": "info",
-                "sticky": False,
-            }
-        </field>
-    </record>
-
     <menuitem
         id="menu_product_management_root"
         name="Product Management"
-        action="action_product_management_home"
+        action="action_product_management_category"
         sequence="10"
+        groups="product_management.group_product_management_viewer"
+    />
+
+    <menuitem
+        id="menu_product_management_category"
+        name="Categories"
+        parent="menu_product_management_root"
+        action="action_product_management_category"
+        sequence="10"
+        groups="product_management.group_product_management_viewer"
+    />
+
+    <menuitem
+        id="menu_product_management_product"
+        name="Products"
+        parent="menu_product_management_root"
+        action="action_product_management_product"
+        sequence="5"
+        groups="product_management.group_product_management_viewer"
     />
 </odoo>
