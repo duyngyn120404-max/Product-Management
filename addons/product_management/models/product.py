@@ -147,3 +147,12 @@ class ProductManagementProduct(models.Model):
 
             if commands:
                 product.field_value_ids = commands
+
+    @api.constrains("active", "product_status")
+    def _check_active_product_status_consistency(self):
+        for product in self:
+            if not product.active and product.product_status == "available":
+                raise ValidationError(
+                    "An available product cannot be archived. "
+                    "Set the product status to Discontinued before archiving."
+                )
