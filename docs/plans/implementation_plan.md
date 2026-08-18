@@ -45,14 +45,15 @@ Future works:
 ## Epic 5. Product Discovery
 
 | Done | ID | Task |
-|---|---|---|
-| [ ] | DIS-01 | Xây dựng danh sách sản phẩm. |
-| [ ] | DIS-02 | Xây dựng trang chi tiết sản phẩm. |
-| [ ] | DIS-03 | Tìm kiếm theo tên hoặc mã sản phẩm. |
-| [ ] | DIS-04 | Lọc theo danh mục, trạng thái và thương hiệu. |
-| [ ] | DIS-05 | Sắp xếp danh sách theo giá. |
-| [ ] | DIS-06 | Hiển thị thông tin chi tiết theo field của danh mục. |
-
+| --- | --- | --- |
+| Done | DIS-01 | Đặt Product List làm điểm bắt đầu mặc định cho luồng tra cứu sản phẩm.
+| Done | DIS-02 | Thiết lập domain mặc định chỉ hiển thị active product và bật default filter cho product_status = available.
+| Done | DIS-03 |  Rà soát search fields hiện có và giữ các tiêu chỉ tra cứu chính: tên, mã, danh mục, và thương hiệu. | 
+| Done | DIS-04 | Rà soát filter hiện có theo product status và stock status, bổ sung filter còn thiếu nếu cần|
+| Done | DIS-05 | Rà soát group by hiện có theo danh mục, thương hiệu, product_status, và stock_status |
+| Done | DIS-06 | Kiểm tra thao tác tìm kiếm, lọc, group by trên dữ liệu mẫu để phù hợp với luồng tư vấn |
+| Done | DIS-07 | Kiểm tra thao tác sắp xếp trên Product List. |
+| Done | DIS-08 | Kiểm tra Favourites để người dùng lưu các bộ lọc tra cứu nhanh |
 ## Epic 6. Product Comparison
 
 | Done | ID | Task |

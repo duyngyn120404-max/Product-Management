@@ -15,7 +15,6 @@
                 <field name="qty_available"/>
                 <field name="stock_status"/>
                 <field name="product_status"/>
-                <field name="active"/>
             </list>
         </field> 
     </record>
@@ -41,7 +40,6 @@
                             <field name="stock_status"/>
                             <field name="product_status"/>
                             <field name="sequence"/>
-                            <field name="active"/>
                         </group>
                     </group>
 
@@ -84,12 +82,14 @@
                 <field name="category_id"/>
                 <field name="brand_id"/>
 
-                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
-                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
-                <filter name="in_stock" string="In Stock" domain="[('stock_status', '=', 'in_stock')]"/>
-                <filter name="out_of_stock" string="Out of Stock" domain="[('stock_status', '=', 'out_of_stock')]"/>
-                <filter name="available" string="Available" domain="[('product_status', '=', 'available')]"/>
-                <filter name="draft" string="Draft" domain="[('product_status', '=', 'draft')]"/>
+                <filter name="in_stock" string="Stock: In Stock" domain="[('stock_status', '=', 'in_stock')]"/>
+                <filter name="low_stock" string="Stock: Low Stock" domain="[('stock_status', '=', 'low_stock')]"/>
+                <filter name="out_of_stock" string="Stock: Out of Stock" domain="[('stock_status', '=', 'out_of_stock')]"/>
+
+                <separator/>
+
+                <filter name="available" string="Product: Available" domain="[('product_status', '=', 'available')]"/>
+                <filter name="discontinued" string="Product: Discontinued" domain="[('product_status', '=', 'discontinued')]"/>
 
                 <filter name="group_by_category" string="Category" context="{'group_by': 'category_id'}"/>
                 <filter name="group_by_brand" string="Brand" context="{'group_by': 'brand_id'}"/>
@@ -104,7 +104,8 @@
         <field name="res_model">product.management.product</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_product_management_product_search"/>
-        <field name="context">{"search_default_active": 1}</field>
+        <field name="domain">[('active', '=', True)]</field>
+        <field name="context">{"search_default_available": 1}</field>
     </record>
 
 
