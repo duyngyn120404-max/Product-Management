@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_product_management_compare_wizard_form" model="ir.ui.view">
+        <field name="name">product.management.compare.wizard.form</field>
+        <field name="model">product.management.compare.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Compare Products">
+                <group>
+                    <field name="product_ids" widget="many2many_tags" readonly="1"/>
+                    <field name="category_id" readonly="1"/>
+                </group>
+
+                <group string="Common Criteria">
+                    <group>
+                        <field name="show_default_code"/>
+                        <field name="show_brand"/>
+                        <field name="show_list_price"/>
+                    </group>
+                    <group>
+                        <field name="show_qty_available"/>
+                        <field name="show_stock_status"/>
+                        <field name="show_product_status"/>
+                    </group>
+                </group>
+
+                <group string="Specified Criteria">
+                    <field
+                        name="dynamic_field_ids"
+                        widget="many2many_checkboxes"
+                        domain="[('category_id', '=', category_id), ('active', '=', True)]"
+                    />
+                </group>
+                
+                <field name="product_count" invisible="1"/>
+
+                <separator string="Products Comparison"/>
+
+                <!-- 2 products: horizontal -->
+                <div class="row text-center" invisible="product_count != 2">
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <field name="product_name_1" readonly="1" nolabel="1" class="fw-semibold mb-2"/>
+                        <field name="image_1" widget="image" readonly="1" nolabel="1" options="{'size': [128, 128]}"/>
+                    </div>
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <field name="product_name_2" readonly="1" nolabel="1" class="fw-semibold mb-2"/>
+                        <field name="image_2" widget="image" readonly="1" nolabel="1" options="{'size': [128, 128]}"/>
+                    </div>
+                </div>
+
+                <!-- 3 products: horizontal -->
+                <div class="row text-center" invisible="product_count != 3">
+                    <div class="col-4 d-flex flex-column align-items-center">
+                        <field name="product_name_1" readonly="1" nolabel="1" class="fw-semibold mb-2"/>
+                        <field name="image_1" widget="image" readonly="1" nolabel="1" options="{'size': [128, 128]}"/>
+                    </div>
+                    <div class="col-4 d-flex flex-column align-items-center">
+                        <field name="product_name_2" readonly="1" nolabel="1" class="fw-semibold mb-2"/>
+                        <field name="image_2" widget="image" readonly="1" nolabel="1" options="{'size': [128, 128]}"/>
+                    </div>
+                    <div class="col-4 d-flex flex-column align-items-center">
+                        <field name="product_name_3" readonly="1" nolabel="1" class="fw-semibold mb-2"/>
+                        <field name="image_3" widget="image" readonly="1" nolabel="1" options="{'size': [128, 128]}"/>
+                    </div>
+                </div>
+
+                <!-- 4 products: 2x2 -->
+                <div class="row text-center" invisible="product_count != 4">
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <field name="product_name_1" readonly="1" nolabel="1" class="fw-semibold mb-2"/>
+                        <field name="image_1" widget="image" readonly="1" nolabel="1" options="{'size': [128, 128]}"/>
+                    </div>
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <field name="product_name_2" readonly="1" nolabel="1" class="fw-semibold mb-2"/>
+                        <field name="image_2" widget="image" readonly="1" nolabel="1" options="{'size': [128, 128]}"/>
+                    </div>
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <field name="product_name_3" readonly="1" nolabel="1" class="fw-semibold mb-2"/>
+                        <field name="image_3" widget="image" readonly="1" nolabel="1" options="{'size': [128, 128]}"/>
+                    </div>
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <field name="product_name_4" readonly="1" nolabel="1" class="fw-semibold mb-2"/>
+                        <field name="image_4" widget="image" readonly="1" nolabel="1" options="{'size': [128, 128]}"/>
+                    </div>
+                </div>
+
+                <field name="result_line_ids">
+                    <list create="0" edit="0" delete="0">
+                        <field name="criterion_name"/>
+                        <field name="value_1"/>
+                        <field name="value_2"/>
+                        <field name="value_3" column_invisible="parent.product_count &lt; 3"/>
+                        <field name="value_4" column_invisible="parent.product_count &lt; 4"/>
+                    </list>
+                </field>
+
+                <footer>
+                    <button string="Close" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

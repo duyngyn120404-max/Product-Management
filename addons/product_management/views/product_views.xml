@@ -5,6 +5,15 @@
         <field name="model">product.management.product</field>
         <field name="arch" type="xml">
             <list string="Products">
+                <header>
+                    <button
+                        name="action_open_compare_wizard"
+                        type="object"
+                        string="Compare Products"
+                        class="btn-primary" 
+                    />
+                </header>
+                
                 <field name="sequence" widget="handle"/>
                 <field name="image_1920" widget="image" options="{'size': [50, 50]}"/>
                 <field name="default_code" placeholder="Category-Brand-Product"/>

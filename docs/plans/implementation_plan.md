@@ -54,23 +54,39 @@ Future works:
 | Done | DIS-06 | Kiểm tra thao tác tìm kiếm, lọc, group by trên dữ liệu mẫu để phù hợp với luồng tư vấn |
 | Done | DIS-07 | Kiểm tra thao tác sắp xếp trên Product List. |
 | Done | DIS-08 | Kiểm tra Favourites để người dùng lưu các bộ lọc tra cứu nhanh |
+
 ## Epic 6. Product Comparison
 
-| Done | ID | Task |
+| Status | ID | Task |
 |---|---|---|
-| [ ] | CMP-01 | Cho phép người dùng chọn nhiều sản phẩm cùng danh mục. |
-| [ ] | CMP-02 | Cho phép người dùng chọn hoặc bỏ tiêu chí so sánh. |
-| [ ] | CMP-03 | Hiển thị bảng so sánh theo field chung và field động của danh mục. |
-| [ ] | CMP-04 | Chặn hoặc cảnh báo khi chọn sản phẩm khác danh mục. |
+| Done | CMP-01 | Tạo compare wizard bằng TransientModel để lưu tạm danh sách product, category, tiêu chí và kết quả so sánh. |
+| Done | CMP-02 | Thêm button Compare Products trên Product List để mở compare wizard cho các product được chọn mà không yêu cầu quyền write trên Product. |
+| Done | CMP-03 | Validate số lượng product được chọn: tối thiểu 2 và tối đa 4 product trong một lần so sánh. |
+| Done | CMP-04 | Validate các product được chọn phải thuộc cùng một category trước khi hiển thị bảng so sánh. |
+| Done | CMP-05 | Hiển thị các tiêu chí thông tin chung để người dùng chọn/bỏ: mã sản phẩm, thương hiệu, giá, tồn kho, trạng thái tồn kho và trạng thái sản phẩm. |
+| Done | CMP-06 | Hiển thị dynamic fields của category dưới dạng tiêu chí so sánh và cho phép người dùng chọn/bỏ từng field. |
+| Done | CMP-07 | Tạo bảng so sánh readonly, hiển thị product theo cột và tiêu chí theo dòng. |
+| Done | CMP-08 | Cập nhật bảng so sánh khi người dùng thay đổi tiêu chí trong wizard. |
+| Done | CMP-09 | Hiển thị dấu gạch ngang cho tiêu chí không có giá trị ở một product. |
+| Done | CMP-10 | Kiểm tra compare wizard bằng user Viewer để đảm bảo chỉ đọc Product nhưng vẫn mở và dùng compare được. |
 
 ## Epic 7. Basic Inventory
 
-| Done | ID | Task |
+Scope:
+- Basic Inventory trong MVP chỉ quản lý tồn kho đơn giản ở cấp product.
+- Admin nhập `qty_available`, hệ thống tự tính `stock_status`.
+- Chưa xử lý nhập kho/xuất kho, lịch sử biến động tồn kho, nhiều kho, giữ hàng hoặc tích hợp đơn bán.
+
+| Status | ID | Task |
 |---|---|---|
-| [ ] | INV-01 | Lưu số lượng tồn hiện tại của sản phẩm. |
-| [ ] | INV-02 | Cập nhật trạng thái còn hàng, hết hàng hoặc sắp hết nếu cần. |
-| [ ] | INV-03 | Hiển thị tồn kho trong danh sách và chi tiết sản phẩm. |
-| [ ] | INV-04 | Hỗ trợ lọc sản phẩm theo trạng thái tồn kho. |
+| Done | INV-01 | Xác nhận `qty_available` là số lượng tồn hiện tại của product trong phạm vi MVP. |
+| Done | INV-02 | Không cho `qty_available` nhận giá trị âm khi tạo hoặc cập nhật product. |
+| Done | INV-03 | Tự tính `stock_status` từ `qty_available` theo rule: hết hàng, sắp hết hàng, còn hàng. |
+| Done | INV-04 | Không cho người dùng chỉnh tay `stock_status`; giá trị này do hệ thống kiểm soát. |
+| Done | INV-05 | Hiển thị `qty_available` và `stock_status` trên Product List và Product Form. |
+| Done | INV-06 | Hỗ trợ tra cứu sản phẩm theo `stock_status` thông qua filter và group by. |
+| Done | INV-07 | Đưa thông tin tồn kho vào Product Comparison để người dùng so sánh nhanh giữa các sản phẩm. |
+| [ ] | INV-08 | Chạy manual test cho các rule tồn kho trước khi nghiệm thu. |
 
 ## Epic 8. Testing & UAT
 
