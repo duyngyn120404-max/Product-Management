@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_product_management_account_create_wizard_form" model="ir.ui.view">
+        <field name="name">product.management.account.create.wizard.form</field>
+        <field name="model">product.management.account.create.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Viewer Account">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="login"/>
+                        <field name="email"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        name="action_create_viewer_account"
+                        type="object"
+                        string="Create"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_product_management_account_create_wizard" model="ir.actions.act_window">
+        <field name="name">Create Viewer Account</field>
+        <field name="res_model">product.management.account.create.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_product_management_account_list" model="ir.ui.view">
+        <field name="name">product.management.account.list</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <list string="Accounts" create="0" delete="0">
+                <header>
+                    <button
+                        name="%(action_product_management_account_create_wizard)d"
+                        type="action"
+                        string="Create Viewer"
+                        class="btn-primary"
+                        display="always"
+                    />
+                </header>
+                <field name="name"/>
+                <field name="login"/>
+                <field name="email"/>
+                <field name="product_management_role"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_product_management_account_form" model="ir.ui.view">
+        <field name="name">product.management.account.form</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <form string="Account" create="0" delete="0">
+                <header>
+                    <button
+                        name="action_open_product_management_edit_wizard"
+                        type="object"
+                        string="Edit Account"
+                        class="btn-primary"
+                    />
+                        <button
+                            name="action_open_product_management_password_wizard"
+                            type="object"
+                            string="Set Temporary Password"
+                            class="btn-secondary"
+                        />
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="login" readonly="1"/>
+                            <field name="email" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="product_management_role" readonly="1"/>
+                            <field name="active" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Activity">
+                        <group>
+                            <field name="create_uid" readonly="1"/>
+                            <field name="create_date" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="write_uid" readonly="1"/>
+                            <field name="write_date" readonly="1"/>
+                            <field name="login_date" readonly="1"/>
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_product_management_account_edit_wizard_form" model="ir.ui.view">
+        <field name="name">product.management.account.edit.wizard.form</field>
+        <field name="model">product.management.account.edit.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Edit Account">
+                <sheet>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="name"/>
+                        <field name="login"/>
+                        <field name="email"/>
+                        <field name="active"/>
+                        <field name="role"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        name="action_update_account"
+                        type="object"
+                        string="Save"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_product_management_account_password_wizard_form" model="ir.ui.view">
+        <field name="name">product.management.account.password.wizard.form</field>
+        <field name="model">product.management.account.password.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Set Temporary Password">
+                <sheet>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="new_password" password="True"/>
+                        <field name="confirm_password" password="True"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        name="action_set_temporary_password"
+                        type="object"
+                        string="Set Password"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_product_management_accounts" model="ir.actions.act_window">
+        <field name="name">Accounts</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_product_management_account_list"/>
+        <field name="domain" eval="[
+            ('all_group_ids', 'in', [
+                ref('product_management.group_product_management_viewer'),
+                ref('product_management.group_product_management_admin')
+            ])
+        ]"/>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="action_product_management_accounts_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_product_management_account_list"/>
+        <field name="act_window_id" ref="action_product_management_accounts"/>
+    </record>
+
+    <record id="action_product_management_accounts_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_product_management_account_form"/>
+        <field name="act_window_id" ref="action_product_management_accounts"/>
+    </record>
+</odoo>

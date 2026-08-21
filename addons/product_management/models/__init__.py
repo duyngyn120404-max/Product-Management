@@ -4,3 +4,7 @@ from . import brand
 from . import product
 from . import product_field_value
 from . import product_compare_wizard
+from . import account_create_wizard
+from . import account_edit_wizard
+from . import account_user
+from . import account_password_wizard
