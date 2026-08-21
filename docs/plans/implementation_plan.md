@@ -8,6 +8,11 @@
 | Phiên bản tài liệu | Draft 1 |
 | Ngày lập | 2026-08-07 |
 
+## Epic 0. Technical Debt
+| Status | ID | Task |
+|---|---|---|
+| Not Started | SEC-01 | Rà soát quyền unlink cho Product, Category, Brand và dynamic field để ưu tiên archive thay vì delete nhằm giữ lịch sử nghiệp vụ. |
+
 ## Epic 1. Project Setup
 | Status | ID | Task |
 |---|---|---|
@@ -88,7 +93,23 @@ Scope:
 | Done | INV-07 | Đưa thông tin tồn kho vào Product Comparison để người dùng so sánh nhanh giữa các sản phẩm. |
 | [ ] | INV-08 | Chạy manual test cho các rule tồn kho trước khi nghiệm thu. |
 
-## Epic 8. Testing & UAT
+## Epic 8. Account Managemnt
+| Status | ID | Task |
+|---|---|---|
+| Done | ACC-01 | Xác định model nền tảng dùng cho account management, ưu tiên kế thừa `res.users` thay vì tạo model user riêng. |
+| Done | ACC-02 | Tạo menu Account Management chỉ hiển thị cho Product Admin. |
+| Done | ACC-03 | Tạo list/form view đơn giản để Product Admin xem danh sách user thuộc phạm vi Product Management. |
+| Done | ACC-05 | Cho phép Product Admin tạo account Viewer mới với các thông tin tối thiểu: tên, email/login, trạng thái hoạt động. |
+| Done | ACC-06 | Khi tạo account từ Account Management, tự gán quyền Product Management Viewer mặc định. |
+| Done | ACC-07 | Cho phép Product Admin cập nhật thông tin cơ bản của Viewer như tên, email/login và trạng thái hoạt động. |
+| Done | ACC-08 | Cho phép Product Admin gán đổi role trong phạm vi Product Management giữa Viewer và Admin theo rule được xác nhận. |
+| Done | ACC-10 | Cho phép Product Admin reset password tạm thời. |
+| Done | ACC-11 | Hiển thị lịch sử hoạt động cơ bản của account, ưu tiên các thông tin có sẵn như người tạo, ngày tạo, người cập nhật, ngày cập nhật và lần đăng nhập gần nhất nếu Odoo hỗ trợ. |
+| Done | ACC-12 | Đảm bảo Viewer không thể truy cập menu Account Management. |
+| Done | ACC-13 | Đảm bảo Product Admin không thể quản lý user ngoài phạm vi Product Management qua màn hình này. |
+## Epic 9. Product UI Enhancement
+
+## Epic 10. Testing & UAT
 
 | Done | ID | Task |
 |---|---|---|
@@ -101,7 +122,7 @@ Scope:
 | [ ] | TST-07 | Test performance theo NFR MVP. |
 | [ ] | TST-08 | Chuẩn bị dữ liệu demo/UAT. |
 
-## Epic 9. Deployment & Handover
+## Epic 11. Deployment & Handover
 
 | Done | ID | Task |
 |---|---|---|
@@ -111,3 +132,4 @@ Scope:
 | [ ] | DEP-04 | Thiết lập backup database và filestore. |
 | [ ] | DEP-05 | Viết hướng dẫn vận hành cơ bản. |
 | [ ] | DEP-06 | Bàn giao source code, tài liệu và hướng dẫn sử dụng. |
+
