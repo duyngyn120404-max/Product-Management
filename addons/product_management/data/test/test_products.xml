@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="test_product_laptop_draft" model="product.management.product">
+            <field name="default_code">TEST-LAP-DRAFT</field>
+            <field name="name">TEST - Laptop Draft</field>
+            <field name="category_id" ref="test_category_laptop"/>
+            <field name="brand_id" ref="test_brand_dell"/>
+            <field name="list_price">1000.0</field>
+            <field name="qty_available">10</field>
+            <field name="product_status">draft</field>
+            <field name="active">True</field>
+            <field name="sequence">10</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('test_field_laptop_cpu'), 'value_char': 'Intel i5'}),
+                (0, 0, {'field_id': ref('test_field_laptop_ram'), 'value_integer': 16}),
+                (0, 0, {'field_id': ref('test_field_laptop_warranty'), 'option_id': ref('test_option_laptop_warranty_12')}),
+                (0, 0, {'field_id': ref('test_field_laptop_touch_screen'), 'value_boolean': False})
+            ]"/>
+        </record>
+
+        <record id="test_product_laptop_full_specs" model="product.management.product">
+            <field name="default_code">TEST-LAP-FULL</field>
+            <field name="name">TEST - Laptop Full Specs</field>
+            <field name="category_id" ref="test_category_laptop"/>
+            <field name="brand_id" ref="test_brand_apple"/>
+            <field name="list_price">1500.0</field>
+            <field name="qty_available">20</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">20</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('test_field_laptop_cpu'), 'value_char': 'Apple M3'}),
+                (0, 0, {'field_id': ref('test_field_laptop_ram'), 'value_integer': 16}),
+                (0, 0, {'field_id': ref('test_field_laptop_warranty'), 'option_id': ref('test_option_laptop_warranty_24')}),
+                (0, 0, {'field_id': ref('test_field_laptop_touch_screen'), 'value_boolean': False}),
+                (0, 0, {'field_id': ref('test_field_laptop_release_date'), 'value_date': '2026-01-01'})
+            ]"/>
+        </record>
+
+        <record id="test_product_laptop_missing_specs" model="product.management.product">
+            <field name="default_code">TEST-LAP-MISS</field>
+            <field name="name">TEST - Laptop Missing Specs</field>
+            <field name="category_id" ref="test_category_laptop"/>
+            <field name="brand_id" ref="test_brand_dell"/>
+            <field name="list_price">900.0</field>
+            <field name="qty_available">8</field>
+            <field name="product_status">draft</field>
+            <field name="active">True</field>
+            <field name="sequence">30</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('test_field_laptop_ram'), 'value_integer': 8}),
+                (0, 0, {'field_id': ref('test_field_laptop_touch_screen'), 'value_boolean': False})
+            ]"/>
+        </record>
+
+        <record id="test_product_laptop_low_stock" model="product.management.product">
+            <field name="default_code">TEST-LAP-LOW</field>
+            <field name="name">TEST - Laptop Low Stock</field>
+            <field name="category_id" ref="test_category_laptop"/>
+            <field name="brand_id" ref="test_brand_samsung"/>
+            <field name="list_price">1200.0</field>
+            <field name="qty_available">5</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">40</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('test_field_laptop_cpu'), 'value_char': 'Intel i5'}),
+                (0, 0, {'field_id': ref('test_field_laptop_ram'), 'value_integer': 8}),
+                (0, 0, {'field_id': ref('test_field_laptop_warranty'), 'option_id': ref('test_option_laptop_warranty_12')}),
+                (0, 0, {'field_id': ref('test_field_laptop_touch_screen'), 'value_boolean': True}),
+                (0, 0, {'field_id': ref('test_field_laptop_release_date'), 'value_date': '2025-08-01'})
+            ]"/>
+        </record>
+
+        <record id="test_product_laptop_out_of_stock" model="product.management.product">
+            <field name="default_code">TEST-LAP-OUT</field>
+            <field name="name">TEST - Laptop Out Of Stock</field>
+            <field name="category_id" ref="test_category_laptop"/>
+            <field name="brand_id" ref="test_brand_dell"/>
+            <field name="list_price">1100.0</field>
+            <field name="qty_available">0</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">50</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('test_field_laptop_cpu'), 'value_char': 'Intel i7'}),
+                (0, 0, {'field_id': ref('test_field_laptop_ram'), 'value_integer': 16}),
+                (0, 0, {'field_id': ref('test_field_laptop_warranty'), 'option_id': ref('test_option_laptop_warranty_12')}),
+                (0, 0, {'field_id': ref('test_field_laptop_touch_screen'), 'value_boolean': False}),
+                (0, 0, {'field_id': ref('test_field_laptop_release_date'), 'value_date': '2025-01-15'})
+            ]"/>
+        </record>
+
+        <record id="test_product_smartphone_full_specs" model="product.management.product">
+            <field name="default_code">TEST-PHN-FULL</field>
+            <field name="name">TEST - Smartphone Full Specs</field>
+            <field name="category_id" ref="test_category_smartphone"/>
+            <field name="brand_id" ref="test_brand_samsung"/>
+            <field name="list_price">800.0</field>
+            <field name="qty_available">15</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">60</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('test_field_smartphone_chipset'), 'value_char': 'Snapdragon 8'}),
+                (0, 0, {'field_id': ref('test_field_smartphone_storage'), 'value_integer': 256}),
+                (0, 0, {'field_id': ref('test_field_smartphone_warranty'), 'option_id': ref('test_option_smartphone_warranty_24')}),
+                (0, 0, {'field_id': ref('test_field_smartphone_battery'), 'value_integer': 5000}),
+                (0, 0, {'field_id': ref('test_field_smartphone_5g_support'), 'value_boolean': True})
+            ]"/>
+        </record>
+
+        <record id="test_product_smartphone_compare" model="product.management.product">
+            <field name="default_code">TEST-PHN-COMP</field>
+            <field name="name">TEST - Smartphone Compare</field>
+            <field name="category_id" ref="test_category_smartphone"/>
+            <field name="brand_id" ref="test_brand_apple"/>
+            <field name="list_price">1000.0</field>
+            <field name="qty_available">7</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">70</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('test_field_smartphone_chipset'), 'value_char': 'A18'}),
+                (0, 0, {'field_id': ref('test_field_smartphone_storage'), 'value_integer': 128}),
+                (0, 0, {'field_id': ref('test_field_smartphone_warranty'), 'option_id': ref('test_option_smartphone_warranty_12')}),
+                (0, 0, {'field_id': ref('test_field_smartphone_battery'), 'value_integer': 4300}),
+                (0, 0, {'field_id': ref('test_field_smartphone_5g_support'), 'value_boolean': True})
+            ]"/>
+        </record>
+    </data>
+</odoo>

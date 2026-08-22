@@ -16,6 +16,7 @@ Product Comparison trong MVP.
 ## 2. Test Cases
 
 ### CMP-TC-01. Mở compare wizard từ Product List
+Status: Passed
 
 Preconditions:
 - Có ít nhất 2 product cùng category.
@@ -30,6 +31,7 @@ Expected Result:
 - Wizard hiển thị các product đã chọn và category tương ứng.
 
 ### CMP-TC-02. Chặn compare khi số lượng product không hợp lệ
+Status: Passed
 
 Preconditions:
 - Có ít nhất 5 product.
@@ -43,6 +45,7 @@ Expected Result:
 - Hệ thống chặn khi chọn nhiều hơn 4 product.
 
 ### CMP-TC-03. Chặn compare product khác category
+Status: Passed
 
 Preconditions:
 - Có ít nhất 2 product thuộc 2 category khác nhau.
@@ -56,6 +59,7 @@ Expected Result:
 - Hệ thống hiển thị lỗi/cảnh báo rằng chỉ compare được product cùng category.
 
 ### CMP-TC-04. Hiển thị bảng compare readonly
+Status: Passed
 
 Preconditions:
 - Có 2-4 product cùng category.
@@ -72,6 +76,7 @@ Expected Result:
 - Bảng chỉ đọc, không chỉnh sửa dữ liệu product.
 
 ### CMP-TC-05. Chọn/bỏ tiêu chí compare
+Status: Passed
 
 Preconditions:
 - Compare wizard đã mở với 2-4 product cùng category.

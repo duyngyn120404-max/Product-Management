@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="test_brand_apple" model="product.management.brand">
+            <field name="name">TEST - Apple</field>
+            <field name="description">Common test brand.</field>
+            <field name="active">True</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="test_brand_samsung" model="product.management.brand">
+            <field name="name">TEST - Samsung</field>
+            <field name="description">Common test brand.</field>
+            <field name="active">True</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="test_brand_dell" model="product.management.brand">
+            <field name="name">TEST - Dell</field>
+            <field name="description">Common test brand.</field>
+            <field name="active">True</field>
+            <field name="sequence">30</field>
+        </record>
+    </data>
+</odoo>
