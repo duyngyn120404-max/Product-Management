@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="uat_product_dell_xps_13" model="product.management.product">
+            <field name="default_code">LAP-DELL-XPS13</field>
+            <field name="name">Dell XPS 13</field>
+            <field name="category_id" ref="uat_category_laptop"/>
+            <field name="brand_id" ref="uat_brand_dell"/>
+            <field name="purpose">Compact laptop for office work, sales consultation, and mobile productivity.</field>
+            <field name="list_price">1299.0</field>
+            <field name="qty_available">10</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">10</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('uat_field_laptop_cpu'), 'value_char': 'Intel Core Ultra 7'}),
+                (0, 0, {'field_id': ref('uat_field_laptop_ram'), 'value_integer': 16}),
+                (0, 0, {'field_id': ref('uat_field_laptop_storage'), 'value_char': '512 GB SSD'}),
+                (0, 0, {'field_id': ref('uat_field_laptop_screen_size'), 'value_char': '13.4 inch'}),
+                (0, 0, {'field_id': ref('uat_field_laptop_warranty'), 'option_id': ref('uat_option_laptop_warranty_24')})
+            ]"/>
+        </record>
+
+        <record id="uat_product_macbook_air_m2" model="product.management.product">
+            <field name="default_code">LAP-APPLE-MBA-M2</field>
+            <field name="name">MacBook Air M2</field>
+            <field name="category_id" ref="uat_category_laptop"/>
+            <field name="brand_id" ref="uat_brand_apple"/>
+            <field name="purpose">Lightweight laptop for premium office users, travel, and long battery life.</field>
+            <field name="list_price">1199.0</field>
+            <field name="qty_available">3</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">20</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('uat_field_laptop_cpu'), 'value_char': 'Apple M2'}),
+                (0, 0, {'field_id': ref('uat_field_laptop_ram'), 'value_integer': 8}),
+                (0, 0, {'field_id': ref('uat_field_laptop_storage'), 'value_char': '256 GB SSD'}),
+                (0, 0, {'field_id': ref('uat_field_laptop_screen_size'), 'value_char': '13.6 inch'}),
+                (0, 0, {'field_id': ref('uat_field_laptop_warranty'), 'option_id': ref('uat_option_laptop_warranty_12')})
+            ]"/>
+        </record>
+
+        <record id="uat_product_dell_inspiron_15" model="product.management.product">
+            <field name="default_code">LAP-DELL-INSP15</field>
+            <field name="name">Dell Inspiron 15</field>
+            <field name="category_id" ref="uat_category_laptop"/>
+            <field name="brand_id" ref="uat_brand_dell"/>
+            <field name="purpose">General-purpose laptop for office work, study, and budget-conscious users.</field>
+            <field name="list_price">749.0</field>
+            <field name="qty_available">2</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">30</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('uat_field_laptop_cpu'), 'value_char': 'Intel Core i5'}),
+                (0, 0, {'field_id': ref('uat_field_laptop_ram'), 'value_integer': 8}),
+                (0, 0, {'field_id': ref('uat_field_laptop_storage'), 'value_char': '512 GB SSD'}),
+                (0, 0, {'field_id': ref('uat_field_laptop_screen_size'), 'value_char': '15.6 inch'}),
+                (0, 0, {'field_id': ref('uat_field_laptop_warranty'), 'option_id': ref('uat_option_laptop_warranty_12')})
+            ]"/>
+        </record>
+
+        <record id="uat_product_laptop_draft_missing_specs" model="product.management.product">
+            <field name="default_code">LAP-DELL-LAT-DRAFT</field>
+            <field name="name">Dell Latitude Draft</field>
+            <field name="category_id" ref="uat_category_laptop"/>
+            <field name="brand_id" ref="uat_brand_dell"/>
+            <field name="purpose">Draft product used to verify missing required specification behavior.</field>
+            <field name="list_price">999.0</field>
+            <field name="qty_available">5</field>
+            <field name="product_status">draft</field>
+            <field name="active">True</field>
+            <field name="sequence">40</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('uat_field_laptop_ram'), 'value_integer': 16}),
+                (0, 0, {'field_id': ref('uat_field_laptop_storage'), 'value_char': '512 GB SSD'})
+            ]"/>
+        </record>
+
+        <record id="uat_product_iphone_15" model="product.management.product">
+            <field name="default_code">PHN-APPLE-IP15</field>
+            <field name="name">iPhone 15</field>
+            <field name="category_id" ref="uat_category_smartphone"/>
+            <field name="brand_id" ref="uat_brand_apple"/>
+            <field name="purpose">Smartphone for daily communication, photography, and premium customer consultation.</field>
+            <field name="list_price">899.0</field>
+            <field name="qty_available">8</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">50</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('uat_field_smartphone_processor'), 'value_char': 'A16 Bionic'}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_ram'), 'value_integer': 6}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_storage'), 'value_integer': 128}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_camera'), 'value_text': 'Dual-camera system with 48 MP main camera.'}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_battery'), 'value_integer': 3349}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_color'), 'option_id': ref('uat_option_smartphone_color_blue')})
+            ]"/>
+        </record>
+
+        <record id="uat_product_samsung_galaxy_s24" model="product.management.product">
+            <field name="default_code">PHN-SAM-GS24</field>
+            <field name="name">Samsung Galaxy S24</field>
+            <field name="category_id" ref="uat_category_smartphone"/>
+            <field name="brand_id" ref="uat_brand_samsung"/>
+            <field name="purpose">Android flagship phone for photography, productivity, and high-performance use.</field>
+            <field name="list_price">849.0</field>
+            <field name="qty_available">0</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">60</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('uat_field_smartphone_processor'), 'value_char': 'Snapdragon 8 Gen 3'}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_ram'), 'value_integer': 8}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_storage'), 'value_integer': 256}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_camera'), 'value_text': 'Triple-camera system with telephoto support.'}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_battery'), 'value_integer': 4000}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_color'), 'option_id': ref('uat_option_smartphone_color_black')})
+            ]"/>
+        </record>
+
+        <record id="uat_product_discontinued_phone" model="product.management.product">
+            <field name="default_code">PHN-SAM-A52-DISC</field>
+            <field name="name">Samsung Galaxy A52</field>
+            <field name="category_id" ref="uat_category_smartphone"/>
+            <field name="brand_id" ref="uat_brand_samsung"/>
+            <field name="purpose">Discontinued smartphone used to verify archive and discontinued product behavior.</field>
+            <field name="list_price">399.0</field>
+            <field name="qty_available">1</field>
+            <field name="product_status">discontinued</field>
+            <field name="active">True</field>
+            <field name="sequence">70</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('uat_field_smartphone_processor'), 'value_char': 'Snapdragon 720G'}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_ram'), 'value_integer': 6}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_storage'), 'value_integer': 128}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_camera'), 'value_text': 'Quad-camera system for general photography.'}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_battery'), 'value_integer': 4500}),
+                (0, 0, {'field_id': ref('uat_field_smartphone_color'), 'option_id': ref('uat_option_smartphone_color_black')})
+            ]"/>
+        </record>
+
+        <record id="uat_product_logitech_wireless_mouse" model="product.management.product">
+            <field name="default_code">ACC-LOGI-MOUSE</field>
+            <field name="name">Logitech Wireless Mouse</field>
+            <field name="category_id" ref="uat_category_accessory"/>
+            <field name="brand_id" ref="uat_brand_logitech"/>
+            <field name="purpose">Wireless accessory for office work and laptop users.</field>
+            <field name="list_price">29.0</field>
+            <field name="qty_available">15</field>
+            <field name="product_status">available</field>
+            <field name="active">True</field>
+            <field name="sequence">80</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('uat_field_accessory_connection_type'), 'option_id': ref('uat_option_accessory_connection_wireless')}),
+                (0, 0, {'field_id': ref('uat_field_accessory_compatibility'), 'value_text': 'Windows, macOS, and common laptop devices.'}),
+                (0, 0, {'field_id': ref('uat_field_accessory_warranty'), 'option_id': ref('uat_option_accessory_warranty_12')}),
+                (0, 0, {'field_id': ref('uat_field_accessory_color'), 'value_char': 'Black'})
+            ]"/>
+        </record>
+
+        <record id="uat_product_usb_c_hub" model="product.management.product">
+            <field name="default_code">ACC-ANKER-USBC-HUB</field>
+            <field name="name">Anker USB-C Hub</field>
+            <field name="category_id" ref="uat_category_accessory"/>
+            <field name="brand_id" ref="uat_brand_anker"/>
+            <field name="purpose">Connectivity accessory for laptops with limited ports.</field>
+            <field name="list_price">49.0</field>
+            <field name="qty_available">5</field>
+            <field name="product_status">draft</field>
+            <field name="active">True</field>
+            <field name="sequence">90</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('uat_field_accessory_connection_type'), 'option_id': ref('uat_option_accessory_connection_usb_c')}),
+                (0, 0, {'field_id': ref('uat_field_accessory_compatibility'), 'value_text': 'MacBook, Windows laptops, and USB-C tablets.'})
+            ]"/>
+        </record>
+
+        <record id="uat_product_laptop_sleeve" model="product.management.product">
+            <field name="default_code">ACC-LAP-SLEEVE-13</field>
+            <field name="name">Laptop Sleeve 13 inch</field>
+            <field name="category_id" ref="uat_category_accessory"/>
+            <field name="purpose">Protective accessory for laptop transport and storage.</field>
+            <field name="list_price">19.0</field>
+            <field name="qty_available">1</field>
+            <field name="product_status">discontinued</field>
+            <field name="active">True</field>
+            <field name="sequence">100</field>
+            <field name="field_value_ids" eval="[
+                (0, 0, {'field_id': ref('uat_field_accessory_connection_type'), 'option_id': ref('uat_option_accessory_connection_none')}),
+                (0, 0, {'field_id': ref('uat_field_accessory_compatibility'), 'value_text': '13 inch laptops.'}),
+                (0, 0, {'field_id': ref('uat_field_accessory_warranty'), 'option_id': ref('uat_option_accessory_warranty_6')}),
+                (0, 0, {'field_id': ref('uat_field_accessory_color'), 'value_char': 'Gray'})
+            ]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Laptop fields -->
+        <record id="uat_field_laptop_cpu" model="product.management.category.field">
+            <field name="name">CPU</field>
+            <field name="category_id" ref="uat_category_laptop"/>
+            <field name="field_type">char</field>
+            <field name="required">True</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+            <field name="help">Main processor model used for customer consultation.</field>
+        </record>
+
+        <record id="uat_field_laptop_ram" model="product.management.category.field">
+            <field name="name">RAM GB</field>
+            <field name="category_id" ref="uat_category_laptop"/>
+            <field name="field_type">integer</field>
+            <field name="required">True</field>
+            <field name="sequence">20</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_laptop_storage" model="product.management.category.field">
+            <field name="name">Storage</field>
+            <field name="category_id" ref="uat_category_laptop"/>
+            <field name="field_type">char</field>
+            <field name="required">True</field>
+            <field name="sequence">30</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_laptop_screen_size" model="product.management.category.field">
+            <field name="name">Screen Size</field>
+            <field name="category_id" ref="uat_category_laptop"/>
+            <field name="field_type">char</field>
+            <field name="required">False</field>
+            <field name="sequence">40</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_laptop_warranty" model="product.management.category.field">
+            <field name="name">Warranty</field>
+            <field name="category_id" ref="uat_category_laptop"/>
+            <field name="field_type">selection</field>
+            <field name="required">True</field>
+            <field name="sequence">50</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_option_laptop_warranty_12" model="product.management.category.field.option">
+            <field name="name">12 months</field>
+            <field name="field_id" ref="uat_field_laptop_warranty"/>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_option_laptop_warranty_24" model="product.management.category.field.option">
+            <field name="name">24 months</field>
+            <field name="field_id" ref="uat_field_laptop_warranty"/>
+            <field name="sequence">20</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Smartphone fields -->
+        <record id="uat_field_smartphone_processor" model="product.management.category.field">
+            <field name="name">Processor</field>
+            <field name="category_id" ref="uat_category_smartphone"/>
+            <field name="field_type">char</field>
+            <field name="required">True</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_smartphone_ram" model="product.management.category.field">
+            <field name="name">RAM GB</field>
+            <field name="category_id" ref="uat_category_smartphone"/>
+            <field name="field_type">integer</field>
+            <field name="required">True</field>
+            <field name="sequence">20</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_smartphone_storage" model="product.management.category.field">
+            <field name="name">Storage GB</field>
+            <field name="category_id" ref="uat_category_smartphone"/>
+            <field name="field_type">integer</field>
+            <field name="required">True</field>
+            <field name="sequence">30</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_smartphone_camera" model="product.management.category.field">
+            <field name="name">Camera</field>
+            <field name="category_id" ref="uat_category_smartphone"/>
+            <field name="field_type">text</field>
+            <field name="required">False</field>
+            <field name="sequence">40</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_smartphone_battery" model="product.management.category.field">
+            <field name="name">Battery mAh</field>
+            <field name="category_id" ref="uat_category_smartphone"/>
+            <field name="field_type">integer</field>
+            <field name="required">False</field>
+            <field name="sequence">50</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_smartphone_color" model="product.management.category.field">
+            <field name="name">Color</field>
+            <field name="category_id" ref="uat_category_smartphone"/>
+            <field name="field_type">selection</field>
+            <field name="required">True</field>
+            <field name="sequence">60</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_option_smartphone_color_black" model="product.management.category.field.option">
+            <field name="name">Black</field>
+            <field name="field_id" ref="uat_field_smartphone_color"/>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_option_smartphone_color_blue" model="product.management.category.field.option">
+            <field name="name">Blue</field>
+            <field name="field_id" ref="uat_field_smartphone_color"/>
+            <field name="sequence">20</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_option_smartphone_color_natural" model="product.management.category.field.option">
+            <field name="name">Natural Titanium</field>
+            <field name="field_id" ref="uat_field_smartphone_color"/>
+            <field name="sequence">30</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Accessory fields -->
+        <record id="uat_field_accessory_connection_type" model="product.management.category.field">
+            <field name="name">Connection Type</field>
+            <field name="category_id" ref="uat_category_accessory"/>
+            <field name="field_type">selection</field>
+            <field name="required">True</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_option_accessory_connection_wireless" model="product.management.category.field.option">
+            <field name="name">Wireless</field>
+            <field name="field_id" ref="uat_field_accessory_connection_type"/>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_option_accessory_connection_usb_c" model="product.management.category.field.option">
+            <field name="name">USB-C</field>
+            <field name="field_id" ref="uat_field_accessory_connection_type"/>
+            <field name="sequence">20</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_option_accessory_connection_none" model="product.management.category.field.option">
+            <field name="name">None</field>
+            <field name="field_id" ref="uat_field_accessory_connection_type"/>
+            <field name="sequence">30</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_accessory_compatibility" model="product.management.category.field">
+            <field name="name">Compatibility</field>
+            <field name="category_id" ref="uat_category_accessory"/>
+            <field name="field_type">text</field>
+            <field name="required">False</field>
+            <field name="sequence">20</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_accessory_warranty" model="product.management.category.field">
+            <field name="name">Warranty</field>
+            <field name="category_id" ref="uat_category_accessory"/>
+            <field name="field_type">selection</field>
+            <field name="required">True</field>
+            <field name="sequence">30</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_option_accessory_warranty_6" model="product.management.category.field.option">
+            <field name="name">6 months</field>
+            <field name="field_id" ref="uat_field_accessory_warranty"/>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_option_accessory_warranty_12" model="product.management.category.field.option">
+            <field name="name">12 months</field>
+            <field name="field_id" ref="uat_field_accessory_warranty"/>
+            <field name="sequence">20</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="uat_field_accessory_color" model="product.management.category.field">
+            <field name="name">Color</field>
+            <field name="category_id" ref="uat_category_accessory"/>
+            <field name="field_type">char</field>
+            <field name="required">False</field>
+            <field name="sequence">40</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>
