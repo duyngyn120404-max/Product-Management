@@ -152,7 +152,7 @@ Expected Result:
 - Viewer mở được product để xem thông tin.
 - Viewer không tạo/sửa/xóa/archive được product.
 
-## 3. Open Questions
-| ID | Observation | Impact | Decision |
+## 3. Fixed Issues During Testing
+| ID | Issue | Fix | Verified By |
 |---|---|---|---|
-| PRO-OBS-01 | Product Specifications hiện hiển thị nhiều cột kỹ thuật theo từng kiểu dữ liệu: Text, Long Text, Integer, Decimal, Boolean, Date, Datetime, Option. | Người dùng khó đọc và dễ nhầm khi nhập specifications. | Consider adding `display_value` on product field values and simplifying the list to Field / Required / Value. |
+| BUG-UI-01 | Product Specifications hiển thị nhiều cột kỹ thuật theo từng kiểu dữ liệu: Text, Long Text, Integer, Decimal, Boolean, Date, Datetime, Option. | Added `display_value` and simplified the specifications list to Field / Required / Value with a type-specific edit form. | PRO-TC-03 |

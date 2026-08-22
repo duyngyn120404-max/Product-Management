@@ -27,13 +27,18 @@ Access Rights được cấu hình theo model bằng `ir.model.access.csv`
 
 | Menu / Action | Admin | Viewer |
 |---|---|---|
+| Xem Dashboard | Có | Có |
 | Xem danh sách sản phẩm | Có | Có |
 | Xem chi tiết sản phẩm | Có | Có |
 | Tìm kiếm, lọc, sắp xếp sản phẩm | Có | Có |
 | So sánh sản phẩm | Có | Có |
 | Quản lý sản phẩm | Có | Không |
-| Quản lý danh mục | Có | Không |
+| Xem danh mục và field theo danh mục | Có | Có |
+| Quản lý danh mục và field theo danh mục | Có | Không |
 | Quản lý tài khoản | Có | Không |
 
 ## 3. Notes
+- Current implementation allows Admin unlink on core business models during
+  internal testing. Final archive/delete policy must be confirmed with the
+  customer before UAT sign-off or production hardening.
 - Secret và thông tin cấu hình không thuộc Access Control của ứng dụng, sẽ được xử lý trong Deployment.

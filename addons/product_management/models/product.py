@@ -8,6 +8,10 @@ class ProductManagementProduct(models.Model):
     _name = "product.management.product"
     _description = "Product Management Product"
     _order = "sequence, name"
+    _name_unique_default_code = models.Constraint(
+        "unique(default_code)",
+        "A product with this internal reference already exists.",
+    )
 
     default_code = fields.Char(string="Internal Reference")
     name = fields.Char(required=True)
@@ -22,6 +26,7 @@ class ProductManagementProduct(models.Model):
         string="Brand",
         ondelete="restrict",
     )
+    purpose = fields.Text(string="Purpose")
     list_price = fields.Float(default=0.0)
     qty_available = fields.Integer(default=0)
     stock_status = fields.Selection(

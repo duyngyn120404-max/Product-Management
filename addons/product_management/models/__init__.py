@@ -8,3 +8,4 @@ from . import account_create_wizard
 from . import account_edit_wizard
 from . import account_user
 from . import account_password_wizard
+from . import dashboard

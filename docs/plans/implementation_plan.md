@@ -144,16 +144,21 @@ UI improvements will be identified and fixed during manual testing and UAT based
 
 | Status | ID | Task |
 |---|---|---|
-| Not Started | TST-12.01 | Cải thiện Product detail/specifications UI để người dùng đọc thông tin tư vấn dễ hơn, ưu tiên hướng `display_value` và giảm các cột kỹ thuật theo field type. |
-| Not Started | TST-12.02 | Chốt và xử lý nhu cầu search/filter theo công dụng/purpose: dùng field cố định hay hỗ trợ search/filter trên dynamic field values. |
-| Not Started | TST-12.03 | Bổ sung các data rule nhỏ còn thiếu: unique product code, category product count, và chốt rule required numeric dynamic field có chấp nhận giá trị `0` hay không. |
-| Not Started | TST-12.04 | Rà soát archive/delete policy cho Product, Category, Brand và dynamic fields để MVP ưu tiên archive/ngừng sử dụng thay vì xóa cứng nếu không thật sự cần. |
-| Not Started | TST-12.05 | Tách test seed XML khỏi production manifest để tránh load dữ liệu `TEST - ...` vào UAT/prod clean environment. |
-| Not Started | TST-12.06 | Cập nhật lại tài liệu bị lệch với code hiện tại: Viewer category access, hard delete policy, addon README, dynamic field approach và testing status. |
-| Not Started | TST-12.07 | Chuyển các mục production readiness/NFR còn thiếu sang Deployment epic: Nginx, HTTPS, backup/restore, deployment checklist, performance/responsive verification. |
-| Not Started | TST-12.08 | Chốt danh sách skipped/later-scope items để không tính vào core MVP feature coverage hiện tại. |
+| Done | TST-12.01 | Cải thiện Product detail/specifications UI để người dùng đọc thông tin tư vấn dễ hơn, ưu tiên hướng `display_value` và giảm các cột kỹ thuật theo field type. |
+| Done | TST-12.02 | Chốt và xử lý nhu cầu search/filter theo công dụng/purpose: dùng field cố định hay hỗ trợ search/filter trên dynamic field values. |
+| Done | TST-12.03 | Bổ sung các data rule nhỏ còn thiếu: unique product code, category product count |
+| Need Confirm | TST-12.04 | Rà soát archive/delete policy cho Product, Category, Brand và dynamic fields để MVP ưu tiên archive/ngừng sử dụng thay vì xóa cứng nếu không thật sự cần. |
+| Deferred | TST-12.05 | Tách test seed XML khỏi production manifest để tránh load dữ liệu `TEST - ...` vào UAT/prod clean environment. |
+| Done | TST-12.06 | Cập nhật lại tài liệu bị lệch với code hiện tại: Viewer category access, hard delete policy, addon README, dynamic field approach và testing status. |
 
+#### TST-12 Subtasks - Dashboard
 
+| Status | ID | Task |
+|---|---|---|
+| Done | DASH-01 | Tạo Dashboard MVP hiển thị tổng số product, available, low stock, out of stock và số category. |
+| Done | DASH-02 | Hiển thị danh sách product mới cập nhật và product cần chú ý về tồn kho. |
+| Done | DASH-03 | Thêm Dashboard menu và đặt làm màn đầu của Product Management. |
+| Deferred | DASH-04 | Dashboard dạng biểu đồ hoặc KPI cards tùy biến. |
 ## Epic 11. UAT
 ## UAT Phases
 

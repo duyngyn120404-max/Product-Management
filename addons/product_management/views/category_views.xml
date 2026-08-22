@@ -5,7 +5,6 @@
         <field name="model">product.management.category</field>
         <field name="arch" type="xml">
             <list string="Categories">
-                <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="parent_id"/>
                 <field name="active"/>
@@ -25,7 +24,6 @@
                             <field name="parent_id"/>
                         </group>
                         <group>
-                            <field name="sequence"/>
                             <field name="active"/>
                         </group>
                     </group>

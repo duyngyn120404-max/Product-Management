@@ -36,6 +36,7 @@
                 (0, 0, {'field_id': ref('test_field_laptop_touch_screen'), 'value_boolean': False}),
                 (0, 0, {'field_id': ref('test_field_laptop_release_date'), 'value_date': '2026-01-01'})
             ]"/>
+            <field name="purpose">Office work, study, document editing, and customer consultation.</field>
         </record>
 
         <record id="test_product_laptop_missing_specs" model="product.management.product">
@@ -71,6 +72,7 @@
                 (0, 0, {'field_id': ref('test_field_laptop_touch_screen'), 'value_boolean': True}),
                 (0, 0, {'field_id': ref('test_field_laptop_release_date'), 'value_date': '2025-08-01'})
             ]"/>
+            <field name="purpose">Office productivity, browsing, video calls, and basic business tasks.</field>
         </record>
 
         <record id="test_product_laptop_out_of_stock" model="product.management.product">
@@ -109,6 +111,7 @@
                 (0, 0, {'field_id': ref('test_field_smartphone_battery'), 'value_integer': 5000}),
                 (0, 0, {'field_id': ref('test_field_smartphone_5g_support'), 'value_boolean': True})
             ]"/>
+            <field name="purpose">Mobile photography, communication, social media, and daily entertainment.</field>
         </record>
 
         <record id="test_product_smartphone_compare" model="product.management.product">
@@ -128,6 +131,7 @@
                 (0, 0, {'field_id': ref('test_field_smartphone_battery'), 'value_integer': 4300}),
                 (0, 0, {'field_id': ref('test_field_smartphone_5g_support'), 'value_boolean': True})
             ]"/>
+            <field name="purpose">Customer consultation for smartphone comparison by storage, chipset, and 5G support.</field>
         </record>
     </data>
 </odoo>

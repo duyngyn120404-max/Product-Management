@@ -59,12 +59,14 @@ Steps:
 4. Search theo internal reference, ví dụ `TEST-LAP-FULL`.
 5. Search theo category `TEST - Laptop`.
 6. Search theo brand `TEST - Apple`.
+7. Search theo purpose/công dụng, ví dụ `office` hoặc `photography`.
 
 Expected Result:
 - Search theo tên trả về product phù hợp.
 - Search theo internal reference trả về product phù hợp.
 - Search theo category trả về products thuộc category đó.
 - Search theo brand trả về products thuộc brand đó.
+- Search theo purpose trả về products có công dụng phù hợp.
 - Search không trả về product không liên quan.
 
 ### DIS-TC-04. Filter theo product status và stock status
