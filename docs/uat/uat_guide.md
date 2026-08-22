@@ -42,7 +42,7 @@ Xác nhận Product Management MVP đáp ứng đủ các luồng nghiệp vụ 
 - Database: product_management_uat
 - Branch/build: uat/
 - Module version: 1.0.0
-- Deploy date: 22-08-2026 
+- Deploy date: 22-08-2026
 
 Note:
 
