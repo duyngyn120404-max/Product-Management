@@ -8,6 +8,17 @@
 | Phiên bản tài liệu | Draft 1 |
 | Ngày lập | 2026-08-07 |
 
+![Project Lifecycle](../assets/Project%20Lifecycle.png)
+**Project LifeCycle**
+1. Requiremnt Intake: Thu thập input ban đầu từ customer, và tài liệu nguồn
+2. Requirement Analysis: Làm rõ yêu cầu chức năng, phi chức năng, role, scope. Các output gồm non/functional requirements
+3. Architecture and Technical Design: Thiết kế kiến trúc, data model, flow, access control, UI View ở mức kỹ thuật. Output gồm: architecture docs, data model, access controll design, detail technical design (flow)
+4. Feature Planning: Chia yêu cầu thành các epic/task với thứ tự thực hiện, tiêu chí hoàn thành. Output là Implementation plan
+4. Feature Implemenentation: Implement từng feature theo task, kiểm thử cơ bản, Output: working code.
+5. Internal Testing: tự kiểm tra các luồng MVP chính, business rules, access control.
+6. UAT Preparation & UAT: Chuẩn bị scenario, dữ liệu và hướng dẫn để custom xác nhận hệ thống đáp ứng nhu cầu sử dụng thực tế. Output gồm UAT Plan, UAT Scenarios, feedback log,
+7. Maintainance và Future Improvements: theo dõi issule sau go-live và fix
+
 ## Epic 0. Technical Debt
 | Status | ID | Task |
 |---|---|---|
@@ -107,21 +118,56 @@ Scope:
 | Done | ACC-11 | Hiển thị lịch sử hoạt động cơ bản của account, ưu tiên các thông tin có sẵn như người tạo, ngày tạo, người cập nhật, ngày cập nhật và lần đăng nhập gần nhất nếu Odoo hỗ trợ. |
 | Done | ACC-12 | Đảm bảo Viewer không thể truy cập menu Account Management. |
 | Done | ACC-13 | Đảm bảo Product Admin không thể quản lý user ngoài phạm vi Product Management qua màn hình này. |
-## Epic 9. Product UI Enhancement
 
-## Epic 10. Testing & UAT
+## Epic 9. Product UI Enhancement
+Deferred to Testing 
+UI improvements will be identified and fixed during manual testing and UAT based on actual usability issues.
+
+## Epic 10. Testing 
 
 | Done | ID | Task |
 |---|---|---|
-| [ ] | TST-01 | Test quyền Admin và Viewer. |
-| [ ] | TST-02 | Test tạo, cập nhật và ngừng sử dụng danh mục. |
-| [ ] | TST-03 | Test field động theo danh mục. |
-| [ ] | TST-04 | Test tạo, cập nhật và ngừng sử dụng sản phẩm. |
-| [ ] | TST-05 | Test danh sách, chi tiết, tìm kiếm, lọc và sắp xếp. |
-| [ ] | TST-06 | Test so sánh sản phẩm. |
-| [ ] | TST-07 | Test performance theo NFR MVP. |
-| [ ] | TST-08 | Chuẩn bị dữ liệu demo/UAT. |
+| Done | TST-01 | Viết Testing Guide để thống nhất môi trường test, database, user roles, test data stragy, format test case, bug handling, UI enhancement |
+| Done | TST-02 | Tạo database `product_management_test` để chạy manual testing độc lập với db dev|
+| Done | TST-03 | Cài đặt module `product_management` trên db `product_management_test` |
+| Done | TST-04 | Thiết kế common test data dùng cho các features: categories, brands, category fields/options, và products |
+| Done | TST-05 | Tạo test seed XML theo nhóm dữ liệu: categories, brands, category fields, product và product field values |
+| Done | TST-06 | Load test seed data cho `product_management_test` và kiểm tra dữ liệu hiển thị đúng UI |
+| Done | TST-07 | Viết test cases và manual test cho Category Management. |
+| Done | TST-08 | Viết test cases và manual test cho Product Management và Product Business Rules. |
+| Done | TST-09 | Viết test cases và manual test cho Product Discovery và Product Comparison. |
+| Done | TST-10 | Viết test cases và manual test Account Management và Access Control. |
+| Done | TST-11 | Xác định các feature còn thiếu/đã cover so với customer requirement |
+| Not Started | TST-12 | Phân loại issue và giải quyết. |
 
+### TST-12 Subtasks - Requirement Coverage Cleanup
+
+| Status | ID | Task |
+|---|---|---|
+| Not Started | TST-12.01 | Cải thiện Product detail/specifications UI để người dùng đọc thông tin tư vấn dễ hơn, ưu tiên hướng `display_value` và giảm các cột kỹ thuật theo field type. |
+| Not Started | TST-12.02 | Chốt và xử lý nhu cầu search/filter theo công dụng/purpose: dùng field cố định hay hỗ trợ search/filter trên dynamic field values. |
+| Not Started | TST-12.03 | Bổ sung các data rule nhỏ còn thiếu: unique product code, category product count, và chốt rule required numeric dynamic field có chấp nhận giá trị `0` hay không. |
+| Not Started | TST-12.04 | Rà soát archive/delete policy cho Product, Category, Brand và dynamic fields để MVP ưu tiên archive/ngừng sử dụng thay vì xóa cứng nếu không thật sự cần. |
+| Not Started | TST-12.05 | Tách test seed XML khỏi production manifest để tránh load dữ liệu `TEST - ...` vào UAT/prod clean environment. |
+| Not Started | TST-12.06 | Cập nhật lại tài liệu bị lệch với code hiện tại: Viewer category access, hard delete policy, addon README, dynamic field approach và testing status. |
+| Not Started | TST-12.07 | Chuyển các mục production readiness/NFR còn thiếu sang Deployment epic: Nginx, HTTPS, backup/restore, deployment checklist, performance/responsive verification. |
+| Not Started | TST-12.08 | Chốt danh sách skipped/later-scope items để không tính vào core MVP feature coverage hiện tại. |
+
+
+## Epic 11. UAT
+## UAT Phases
+
+UAT sẽ được thực hiện sau khi Testing phase hoàn tất các luồng MVP chính và không còn blocker/high severity issue.
+
+| Phase | Mục đích | Kết quả đầu ra |
+|---|---|---|
+| UAT-01. UAT Preparation | Chuẩn bị môi trường, dữ liệu, tài khoản, danh sách scenario và phạm vi nghiệm thu. | UAT checklist, UAT database/data, user accounts, known issues list. |
+| UAT-02. Internal Dry Run | Team nội bộ chạy thử các scenario UAT trước khi đưa cho customer/business user. | Danh sách lỗi còn lại, điều chỉnh scenario hoặc data nếu cần. |
+| UAT-03. Customer/Business User Walkthrough | Hướng dẫn customer/business user luồng chính và phạm vi test. Chi tiết giao tiếp sẽ bổ sung sau. | Người dùng hiểu cách test, phạm vi UAT và cách ghi nhận feedback. |
+| UAT-04. Customer/Business User Testing | Customer/business user chạy scenario theo checklist. Chi tiết lịch, người tham gia và kênh feedback sẽ bổ sung sau. | Kết quả Pass/Fail theo scenario, feedback nghiệp vụ, issue list. |
+| UAT-05. Feedback Triage | Phân loại feedback thành blocker, bug, usability issue, change request hoặc nice-to-have. | Danh sách issue đã phân loại và quyết định xử lý. |
+| UAT-06. Fix & Retest | Sửa lỗi thuộc phạm vi UAT MVP và retest các scenario liên quan. | Scenario đã retest, trạng thái issue cập nhật. |
+| UAT-07. UAT Sign-off | Xác nhận phạm vi MVP đã đạt yêu cầu nghiệm thu hoặc ghi nhận known issues được chấp nhận. | UAT sign-off note, danh sách known issues, quyết định go/no-go. |
 ## Epic 11. Deployment & Handover
 
 | Done | ID | Task |
@@ -132,4 +178,3 @@ Scope:
 | [ ] | DEP-04 | Thiết lập backup database và filestore. |
 | [ ] | DEP-05 | Viết hướng dẫn vận hành cơ bản. |
 | [ ] | DEP-06 | Bàn giao source code, tài liệu và hướng dẫn sử dụng. |
-
