@@ -61,6 +61,7 @@
   - Tạo/cập nhật product.
   - Gắn category và brand.
   - Upload/xem ảnh chính.
+  - Lưu công dụng/purpose phục vụ tư vấn.
   - Quản lý giá bán.
   - Quản lý quantity.
   - Product status: Draft, Available, Discontinued.
@@ -73,10 +74,15 @@
 
 - Product Discovery:
   - Product List là màn chính.
-  - Search theo tên, mã, category, brand.
+  - Search theo tên, mã, category, brand, purpose.
   - Filter theo product status và stock status.
   - Group by category, brand, product status, stock status.
   - Default list ưu tiên active/available products.
+
+- Dashboard:
+  - Dashboard menu là màn đầu của Product Management.
+  - Hiển thị tổng số product, product available, low stock, out of stock và số category.
+  - Hiển thị product mới cập nhật và product cần chú ý về tồn kho.
 
 - Product Comparison:
   - Compare 2-4 product cùng category.
@@ -103,19 +109,18 @@
 
 | Status | Area | Item | Notes | Suggested Decision |
 |---|---|---|---|---|
-| Partial | Product Consultation UX | Product detail/specifications còn khó đọc cho mục đích tư vấn | Đã có product form, ảnh, giá, tồn kho, category, brand và dynamic specifications; nhưng specs UI còn kỹ thuật, nhiều cột theo type. Nội dung tư vấn như công dụng, ưu/nhược điểm, đối tượng phù hợp có thể cover bằng dynamic fields nhưng chưa có layout cố định. | Ưu tiên cải thiện bằng `display_value`; chấp nhận dynamic fields cho MVP nếu customer không yêu cầu layout riêng. |
-| Missing | Product Discovery | Chưa search/filter rõ theo công dụng/purpose | Customer/backlog có yêu cầu lọc theo công dụng. Nếu công dụng là dynamic field thì hiện cũng chưa có search/filter dynamic field values rõ ràng. | Cần chốt trước UAT: thêm field cố định hay hỗ trợ search/filter dynamic fields. |
-| Missing | Product & Category Data Rules | Thiếu một số data rule nhỏ: unique product code, category product count, required numeric value `0` | `default_code` chưa unique; category list chưa có product count; cần chốt `0` có hợp lệ cho required integer/decimal không. | Nên làm unique code + product count; chốt rule numeric `0` là hợp lệ nếu không có lý do nghiệp vụ khác. |
-| Partial | Archive/Delete Policy | Stop using product/category chưa thống nhất hoàn toàn | Đã có active/archive và product status; nhưng ACL vẫn cho unlink. Category inactive không tự ảnh hưởng product, và delete parent category bị chặn bằng message kỹ thuật. | Chốt MVP ưu tiên archive, hạn chế unlink; custom message nếu còn thời gian; không cascade trạng thái category sang product nếu chưa có yêu cầu. |
+| Done | Product Consultation UX | Product detail/specifications đã được làm gọn hơn | Product form có purpose và specifications dùng `display_value` để list đọc dễ hơn; dynamic fields vẫn dùng cho thông tin riêng theo category. | Retest trong UAT nếu customer cần layout tư vấn riêng hơn. |
+| Done | Product Discovery | Search theo công dụng/purpose | Purpose được xử lý bằng field cố định trên Product để search thống nhất, thay vì search dynamic field values. | Dynamic field value search/filter vẫn deferred nếu customer yêu cầu sau UAT. |
+| Done | Product Data Rules | Unique product code | `default_code` đã có unique constraint khi có nhập giá trị; placeholder form hướng dẫn format mã sản phẩm. | Category product count deferred; required numeric `0` accepted by current implementation. |
+| Need Confirm | Archive/Delete Policy | Stop using product/category chưa thống nhất hoàn toàn | Đã có active/archive và product status; current implementation vẫn giữ unlink trong internal testing. Category inactive không tự ảnh hưởng product, và delete parent category bị chặn bằng message kỹ thuật. | Giữ current behavior hiện tại; bàn lại với customer trước UAT/prod. |
 | Partial | Production Readiness & NFR | Production/deployment/testing chưa hoàn chỉnh | Đã có compose/config nền; còn thiếu Nginx, HTTPS, backup/restore, deployment checklist, performance/responsive/backup verification. | Làm trong Deployment epic; không block feature testing nhưng block production go-live. |
-| Partial | Documentation Consistency | Docs lệch với code hiện tại | Một số docs còn lệch: Viewer category access, hard delete product, addon README, dynamic field approach, testing status. | Update trước UAT/sign-off. |
-| Missing | Test Data Isolation | Test seed XML đang nằm trong manifest `data` | Có nguy cơ load dữ liệu `TEST - ...` vào UAT/prod nếu không tách. | Must fix trước clean UAT/prod. |
-| Deferred | Non-MVP / Later Scope | Dashboard, reports, custom profile page, full ACL testing, advanced inventory, mobile app, customer portal, sales/payment/accounting, AI suggestion | Các mục này hoặc nằm ngoài MVP, hoặc customer nói chưa cần, hoặc chỉ hữu ích khi hệ thống có nhiều app/user group hơn. | Skip hiện tại; revisit sau UAT hoặc khi customer yêu cầu. |
+| Done | Documentation Consistency | Docs chính đã được đồng bộ với code hiện tại | Đã cập nhật Viewer category access, hard delete policy note, addon README, dynamic field approach, purpose field và testing status. | Tiếp tục rà khi có thay đổi mới. |
+| Deferred | Test Data Isolation | Test seed XML đang nằm trong manifest `data` | Có nguy cơ load dữ liệu `TEST - ...` vào UAT/prod nếu không tách. Team quyết định giữ hiện tại trong internal testing. | Revisit trước clean UAT/prod. |
+| Deferred | Non-MVP / Later Scope | Reports, custom profile page, full ACL testing, advanced inventory, mobile app, customer portal, sales/payment/accounting, AI suggestion | Các mục này hoặc nằm ngoài MVP, hoặc customer nói chưa cần, hoặc chỉ hữu ích khi hệ thống có nhiều app/user group hơn. | Skip hiện tại; revisit sau UAT hoặc khi customer yêu cầu. |
 ## 6. Deferred / Skipped
 
 | Item | Reason | Revisit When |
 |---|---|---|
-| Dashboard / overview | Customer PDF có nhắc, nhưng backlog xếp phần lớn là Should/Could. Product List hiện đang là màn chính và đủ dùng cho tra cứu MVP. | Customer yêu cầu trong UAT hoặc cần quick overview cho vận hành. |
 | Custom user profile page | Customer nói không cần làm thành trang riêng. Odoo đã có built-in profile/preferences/change password/logout. | Người dùng thấy Odoo built-in khó dùng hoặc cần profile riêng trong Product Management. |
 | Full Access Control testing | Hiện chỉ có một internal app, hai role đơn giản. Smoke test đủ cho MVP hiện tại. | Hệ thống có nhiều app, nhiều phòng ban, nhiều nhóm quyền hoặc dữ liệu chia theo scope. |
 | Advanced inventory | Customer đã ghi ngoài phạm vi MVP: phiếu nhập, phiếu xuất, nhà cung cấp, lịch sử kho, kiểm kê. | Cửa hàng cần quản lý vận hành kho thật. |
@@ -127,4 +132,4 @@
 | Deep performance/load testing | MVP dưới 10 user và khoảng 100 sản phẩm, manual verification là đủ ở giai đoạn này. | Trước production hoặc khi dữ liệu/user tăng. |
 | Responsive/mobile UI testing sâu | Người dùng chủ yếu dùng trình duyệt web; chưa phải blocker cho internal MVP. | Trước UAT chính thức hoặc khi người dùng test nhiều trên mobile/tablet. |
 | Cross-app permission conflict testing | Hiện Product Management gần như là app độc lập. | Khi triển khai thêm app khác hoặc chia quyền giữa nhiều module. |
-| Custom dashboard/report architecture | Chưa có nhu cầu vận hành dashboard/report rõ ràng trong MVP. | Sau UAT, nếu customer muốn xem KPI/tổng quan. |
+| Custom dashboard/report architecture | Dashboard MVP dùng form/list chuẩn của Odoo để hiển thị số liệu và danh sách cần chú ý. Dashboard dạng chart/KPI cards hoặc report chuyên sâu chưa cần trong MVP. | Sau UAT, nếu customer muốn xem KPI/tổng quan riêng hơn. |

@@ -47,8 +47,11 @@ Mục đích: người dùng tìm sản phẩm cần tra cứu
 
 1. Người dùng nhập từ khóa hoặc chọn điều kiện lọc.
 2. Hệ thống áp dụng điều kiện tìm kiếm/lọc trên Product.
-3. Nếu lọc theo field động, hệ thống truy vấn Product Field Values tương ứng.
-4. Hệ thống trả về danh sách sản phẩm phù hợp.
+3. Current MVP supports search/filter on common Product fields such as name,
+   code, category, brand, purpose, product status, and stock status.
+4. Dynamic field value search/filter is deferred unless customer requires it
+   after UAT.
+5. Hệ thống trả về danh sách sản phẩm phù hợp.
 
 ## 4. Product Comparison Flow
 ![Product Comparison](../assets/product_comparison.png)

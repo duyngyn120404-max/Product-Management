@@ -358,5 +358,6 @@ Expected Result:
 
 - Test case về quyền Admin/Viewer chi tiết nên đặt ở tài liệu access control
   hoặc security riêng.
-- Với required numeric dynamic fields, MVP cần chốt thêm việc `0` có được xem là
-  giá trị hợp lệ hay không.
+- Required numeric dynamic fields currently treat `0` as a valid value. No
+  additional MVP work is needed unless customer defines a stricter business
+  rule for a specific field.

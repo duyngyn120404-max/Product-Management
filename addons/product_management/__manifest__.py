@@ -15,6 +15,7 @@
         "views/product_views.xml",
         "views/product_compare_views.xml",
         "views/account_views.xml",
+        "views/dashboard_views.xml",
         "views/product_management_menus.xml",
         "data/test/test_categories.xml",
         "data/test/test_brands.xml",

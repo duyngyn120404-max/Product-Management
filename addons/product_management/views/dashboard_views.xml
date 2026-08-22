@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_product_management_dashboard_form" model="ir.ui.view">
+        <field name="name">product.management.dashboard.form</field>
+        <field name="model">product.management.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Dashboard" create="0" edit="0" delete="0">
+                <sheet>
+                    <group>
+                        <group string="Products">
+                            <field name="total_product_count"/>
+                            <field name="available_product_count"/>
+                            <field name="low_stock_product_count"/>
+                            <field name="out_of_stock_product_count"/>
+                        </group>
+                        <group string="Categories">
+                            <field name="category_count"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Recently Updated">
+                            <field name="recent_product_ids">
+                                <list create="0" edit="0" delete="0">
+                                    <field name="image_1920" widget="image" options="{'size': [40, 40]}"/>
+                                    <field name="default_code"/>
+                                    <field name="name"/>
+                                    <field name="category_id"/>
+                                    <field name="brand_id"/>
+                                    <field name="product_status"/>
+                                    <field name="stock_status"/>
+                                    <field name="write_date"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Stock Attention">
+                            <field name="stock_attention_product_ids">
+                                <list create="0" edit="0" delete="0">
+                                    <field name="image_1920" widget="image" options="{'size': [40, 40]}"/>
+                                    <field name="default_code"/>
+                                    <field name="name"/>
+                                    <field name="category_id"/>
+                                    <field name="qty_available"/>
+                                    <field name="stock_status"/>
+                                    <field name="product_status"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_management_dashboard_main" model="product.management.dashboard">
+        <field name="name">Dashboard</field>
+    </record>
+
+    <record id="action_product_management_dashboard" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="res_model">product.management.dashboard</field>
+        <field name="res_id" ref="product_management_dashboard_main"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_product_management_dashboard_form"/>
+        <field name="target">current</field>
+    </record>
+</odoo>

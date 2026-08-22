@@ -15,12 +15,13 @@
 
 Tài liệu `functional_requirements.md` mô tả các tính năng đáp ứng các nhu cầu nghiệp vụ và người dùng từ khỏa sát ban đầu về yêu cầu của người dùng `customer.pdf`.
 
-Gồm các 9 yêu cầu chức năng chính:
+Gồm các yêu cầu chức năng chính:
 - Xác thực người dùng
 - Phân quyền
 - Quản lý tài khoản
 - Quản lý danh mục
 - Quản lý sản phẩm
+- Tổng quan/Dashboard
 - Danh sách sản phẩm
 - Chi tiết sản phẩm
 - Tìm kiếm, lọc và sắp xếp
@@ -37,8 +38,9 @@ Gồm các 9 yêu cầu chức năng chính:
 - Người xem chỉ được đăng nhập, tìm kiếm và xem thông tin.
 - Sản phẩm không bị xóa cứng trong MVP; hệ thống chỉ chuyển sang trạng thái
   ngừng sử dụng để tránh mất dữ liệu.
-- Mỗi danh mục có thể cần thông tin riêng, nhưng MVP ưu tiên trường văn bản
-  bổ sung thay vì xây cấu trúc trường động.
+- Mỗi danh mục có thể cần thông tin riêng. Current implementation uses
+  category-specific dynamic fields to support this need while keeping common
+  product consultation fields, such as purpose, searchable at product level.
 
 ## 3. Yêu cầu chức năng
 
@@ -95,14 +97,14 @@ Gồm các 9 yêu cầu chức năng chính:
 | FR-05.02 | Quản trị viên cập nhật được thông tin sản phẩm đã có. |
 | FR-05.03 | Quản trị viên ngừng sử dụng sản phẩm thay vì xóa sản phẩm khỏi hệ thống. |
 | FR-05.04 | Quản trị viên gắn sản phẩm với danh mục. |
-| FR-05.05 | Quản trị viên xóa cứng sản phẩm. |
+| FR-05.05 | Quyền xóa cứng sản phẩm cần được xác nhận lại với customer trước UAT/prod; current implementation giữ khả năng unlink trong internal testing. |
 
 ### FR-06. Danh sách sản phẩm
 
 | Mã | Yêu cầu |
 |---|---|
 | FR-06.01 | Trang danh sách sản phẩm là màn hình sử dụng chính sau khi đăng nhập. |
-| FR-06.03 | Với Quản trị viên, danh sách sản phẩm hiển thị thêm thao tác thêm sản phẩm, sửa sản phẩm, ngừng sử dụng và xóa cứng sản phẩm. |
+| FR-06.03 | Với Quản trị viên, danh sách sản phẩm hỗ trợ thao tác thêm sản phẩm, sửa sản phẩm, ngừng sử dụng/archive và xóa cứng nếu policy được customer xác nhận. |
 | FR-06.04 | Với nhân viên, hệ thống ẩn và vô hiệu hóa các thao tác quản trị dữ liệu. |
 
 ### FR-07. Chi tiết sản phẩm
@@ -122,6 +124,7 @@ Gồm các 9 yêu cầu chức năng chính:
 | FR-08.04 | Hệ thống cho phép tìm/lọc sản phẩm theo trạng thái |
 | FR-08.05 | Hệ thống cho phép tìm/lọc sản phẩm theo thương hiệu |
 | FR-08.06 | Hệ thống cho phép sắp xếp theo giá |
+| FR-08.07 | Hệ thống cho phép tìm sản phẩm theo công dụng/purpose. |
 
 ### FR-09. So sánh sản phẩm
 | Mã | Yêu cầu |
@@ -136,6 +139,14 @@ Gồm các 9 yêu cầu chức năng chính:
 | FR-10.01 | Hệ thống lưu số lượng tồn hiện tại của từng sản phẩm. |
 | FR-10.02 | Hệ thống xác định và hiển thị trạng thái còn hàng hoặc hết hàng dựa trên dữ liệu sản phẩm. |
 | FR-10.03 | MVP không quản lý phiếu nhập kho, phiếu xuất kho, nhà cung cấp, kiểm kê kho hoặc lịch sử giao dịch kho. |
+
+### FR-11. Tổng quan/Dashboard
+
+| Mã | Yêu cầu |
+|---|---|
+| FR-11.01 | Hệ thống cung cấp màn hình tổng quan để người dùng xem nhanh tình trạng sản phẩm. |
+| FR-11.02 | Dashboard hiển thị tổng số product, product available, low stock, out of stock, số category, product mới cập nhật và product cần chú ý về tồn kho. |
+| FR-11.03 | Dashboard không yêu cầu biểu đồ phức tạp hoặc báo cáo chuyên sâu trong MVP. |
 
 
 ## 4. Rủi ro và một số giải pháp thay thế

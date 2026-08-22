@@ -73,6 +73,7 @@
 | Category | Danh mục sản phẩm. |
 | Brand | Thương hiệu. |
 | Sale Price | Giá bán. |
+| Purpose | Công dụng hoặc nhu cầu khách hàng mà sản phẩm phù hợp. |
 | Quantity On Hand | Số lượng tồn hiện tại. |
 | Stock Status | Trạng thái tồn kho: còn hàng, hết hàng, sắp hết. |
 | Product Status | Trạng thái sản phẩm: đang sử dụng, ngừng sử dụng. |
